@@ -134,7 +134,8 @@ body {
 .card {
     display:flex;
     position: relative;
-    width: 33.33%;
+    width: 100vw;
+    max-width: 1050px;
     height: auto;
     min-height: 450px;
     backdrop-filter: blur(10px);
@@ -156,22 +157,44 @@ body {
     opacity: 0;
 }
 .card-content {
-    padding: 24px;
+    padding: 50px;
     z-index: 1;
     color: white;
     align-items: center;
     justify-content: center;
     width: 100%;
     text-align: center;
+    gap: 30px;
+}
+
+.card-content .agendaList {
+    margin: 0;
+    padding-left: 24px;
+    text-align: left;
+    display: inline-block;
+}
+
+.card-content .agendaList li {
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+}
+
+.card-content .agendaList li:hover {
+    text-shadow: 0 3px 8px white;
+    transition: text-shadow 0.3s ease-in-out;
 }
 
 .card-content h3 {
-    font-size: 1.5rem;
+    font-size: 2rem;
+    font-weight: bold;
+    color: white;
+    font-style: italic;
     margin-bottom: 16px;
 }
 .card-content p {
-    font-size: 1rem;
+    font-size: 1.5rem;
     margin-bottom: 16px;
+    text-align: left;
 }
 
 /* Responsive Styles */
