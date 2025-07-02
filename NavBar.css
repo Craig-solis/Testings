@@ -1,0 +1,234 @@
+@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@100..500&family=Press+Start+2P&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Jost", sans-serif;
+    min-height: 100dvh;
+    background: url(../images/Background.png) no-repeat center center/cover;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 80px;
+    width: 100%;
+    position: sticky;
+    top: 0;
+    background: transparent;
+    z-index: 998;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(10px);
+}
+
+.navbar.solid {
+    background: #143e6d;
+}
+
+.navbar-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    padding: 0 2rem;
+    max-width: 1600px;
+}
+
+.navbar-logo {
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.navbar-logo img {
+    height: 35px;
+    width: 200px;
+    max-width: 100%;
+}
+
+.pixelWord {
+    font-family: "Press Start 2P", cursive;
+    font-size: 1.25rem;
+    position: translateY()
+}
+
+.navbar-menu {
+    display: flex;
+    text-align: center;
+    list-style: none;
+}
+
+.navbar-container .navbar-menu li a {
+    text-decoration: none;
+    color: white;
+    font-size: 1.2rem;
+    font-weight: 500;
+    padding: 3px 20px;
+    border-radius: 20px;
+    border: 2px solid transparent;
+    transition: all 0.7s ease;
+    white-space: nowrap;
+}
+
+.navbar-container .navbar-menu li a:hover,
+.navbar-container .navbar-menu li a.active {
+    color: #ffffff;
+    background: rgba(17, 74, 179, 0.8);
+    border: 2px solid white;
+}
+
+.navbar-toggle {
+    display: none;
+    background: transparent;
+    border: none;
+    padding: 10px;
+    cursor: pointer;
+    position: relative; /* Add this line */
+    z-index: 2000;      /* Increase z-index */
+}
+
+.bar {
+    display: block;
+    width: 25px;
+    height: 3px;
+    background: white;
+    margin: 5px auto;
+    transition: all 0.3s ease-in-out;
+}
+
+/*Hero Section----------------------*/
+.hero-container {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+    height: 100vh;
+}
+
+.hero-container h1 {
+    font-family: inherit;
+    font-size: 3rem;
+    color: white;
+    text-align: center;
+    margin: 2rem 0;
+}
+
+.hero-container p {
+    font-size: 1.2rem;
+    color: white;
+    text-align: center;
+}
+
+.cards-container {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    padding: 40px;
+}
+.card {
+    display:flex;
+    position: relative;
+    width: 33.33%;
+    height: auto;
+    min-height: 450px;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 0 10px rgb(255, 255, 255);
+    border-radius: 12px;
+    overflow: hidden;
+}
+.card-cover {
+    position: absolute;
+    inset: 0;
+    background: #143e6d;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: opacity 0.4s;
+    z-index: 2;
+}
+.card-cover:hover {
+    opacity: 0;
+}
+.card-content {
+    padding: 24px;
+    z-index: 1;
+    color: white;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    text-align: center;
+}
+
+.card-content h3 {
+    font-size: 1.5rem;
+    margin-bottom: 16px;
+}
+.card-content p {
+    font-size: 1rem;
+    margin-bottom: 16px;
+}
+
+/* Responsive Styles */
+@media (max-width: 880px) {
+    .navbar {
+        backdrop-filter: none;
+    }
+
+    .navbar-container .navbar-menu {
+        display: none;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 1.7rem;
+        position: absolute;
+        height: 100vh;
+        width: 250px;
+        top: 0;
+        right: 0;
+        padding: 5rem 1.5rem;
+        box-shadow: 0 10px 10px rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(30px);
+    }
+
+    .navbar-container .navbar-menu.active {
+        display: flex;
+        transition: 0.3s ease-in-out;
+    }
+
+    .navbar-toggle {
+        display: block;
+        position: relative; /* Ensure it's positioned */
+        z-index: 2000;      /* Keep it above the menu */
+    }
+
+    .navbar-toggle.active .bar:nth-child(2) {
+        opacity: 0;
+    }
+
+    .navbar-toggle.active .bar:nth-child(1) {
+        transform: translateY(8px) rotate(45deg);
+    }
+
+    .navbar-toggle.active .bar:nth-child(3) {
+        transform: translateY(-8px) rotate(-45deg);
+    }
+}
+
+@media (max-width: 480px) {
+    .navbar-container {
+        padding: 0 1rem;
+    }
+    .navbar-logo {
+        font-size: 1.7rem;
+    }
+
+    .navbar-container .navbar-menu li a {
+        font-size: 1.2rem;
+        padding: 3px 15px;
+    }
+}
