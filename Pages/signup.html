@@ -6,12 +6,17 @@
     <title>SignUp</title>
     <link rel="stylesheet" href="auth.css">
     <link rel="icon" type="image/png" href="../images/FrostByte_logo_ABV.png">
+    
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+    <script src="firebase-config.js"></script>
 </head>
 <body>
     <section class="auth-container">
+        <img src="../images/Frostbyte_logo.png" alt="FrostByte Logo">
         <div class="authBox">
             <div class="authPrompt">
-                <h2>FrostByte Inc.</h2>
                 <h3>Create Account</h3>
                 <input type="email" id="email" placeholder="Email" required />
                 <input type="password" id="password" placeholder="Password" required />
@@ -21,10 +26,6 @@
             </div>
         </div>
     </section>
-<!-- Firebase SDKs -->
-<script src="https://www.gstatic.com.0.0/firebase-app.js
-https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script>
-<script src="firebase-config.js"></script>
 
 <script>
   function signUp() {
@@ -34,7 +35,7 @@ https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script>
     firebase.auth().createUserWithEmailAndPassword(email, password)
       .then(() => {
         alert("Account created successfully!");
-        window.location.href = "dashboard.html";
+        window.location.href = "../dashboard.html";
       })
       .catch(error => {
         alert(error.message);

@@ -7,7 +7,13 @@
     <link rel="stylesheet" href="dashboard.css">
     <link rel="icon" type="iamge/png" href="images/FrostByte_logo_ABV.png">
 </head>
-
+<script>
+  firebase.auth().onAuthStateChanged(user => {
+    if (!user) {
+      window.location.href = "login.html"; // redirect if not logged in
+    }
+  });
+</script>
 <body>
     <nav class="navbar">
         <div class="navbar-container">
@@ -53,3 +59,14 @@
 
 
 </html>
+
+<!-- Future logout Button
+<button onclick="logout()">Logout</button>
+<script>
+  function logout() {
+    firebase.auth().signOut().then(() => {
+      window.location.href = "login.html";
+    });
+  }
+</script>
+-->
