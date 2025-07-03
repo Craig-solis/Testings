@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SignUp</title>
+    <link rel="stylesheet" href="auth.css">
+    <link rel="icon" type="image/png" href="../images/FrostByte_logo_ABV.png">
+</head>
+<body>
+    <section class="auth-container">
+        <div class="authBox">
+            <div class="authPrompt">
+                <h2>FrostByte Inc.</h2>
+                <h3>Create Account</h3>
+                <input type="email" id="email" placeholder="Email" required />
+                <input type="password" id="password" placeholder="Password" required />
+                <button onclick="signUp()">Sign Up</button>
+                <p>Already have an account? <a href="login.html">Login</a>
+                </p>
+            </div>
+        </div>
+    </section>
+<!-- Firebase SDKs -->
+<script src="https://www.gstatic.com.0.0/firebase-app.js
+https://www.gstatic.com/firebasejs/9.0.0/firebase-auth.js"></script>
+<script src="firebase-config.js"></script>
+
+<script>
+  function signUp() {
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+
+    firebase.auth().createUserWithEmailAndPassword(email, password)
+      .then(() => {
+        alert("Account created successfully!");
+        window.location.href = "dashboard.html";
+      })
+      .catch(error => {
+        alert(error.message);
+      });
+  }
+</script>
+
+</body>
+
+</html>
