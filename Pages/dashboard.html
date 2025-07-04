@@ -7,8 +7,20 @@
     <link rel="stylesheet" href="../CSS/dashboard.css">
     <link rel="icon" type="iamge/png" href="../images/FrostByte_logo_ABV.png">
 </head>
-<body style="display: none;">
-    <nav class="navbar">
+<body >
+  <script src="../Java/dashboard.js"></script>
+  <script>
+    window.onload = function () {
+      firebase.auth().onAuthStateChanged(user => {
+        if (user) {
+          document.body.style.display = "block"; // show content only if user is authenticated
+        } else {
+          window.location.href = "../login.html"; // redirect if not
+        }
+      });
+    };
+  </script>
+  <nav class="navbar">
         <div class="navbar-container">
             <a href="" class="navbar-logo"><img src="../images/Frostbyte_logo.png" alt="Navigation Logo"><a>
             <button class="navbar-toggle">
@@ -47,18 +59,7 @@
             </div>
         </div>
 
-<script src="../Java/dashboard.js"></script>
-<script>
-    window.onload = function () {
-      firebase.auth().onAuthStateChanged(user => {
-        if (user) {
-          document.body.style.display = "block"; // show content only if user is authenticated
-        } else {
-          window.location.href = "../login.html"; // redirect if not
-        }
-      });
-    };
-  </script>
+
 </body>
 
 
