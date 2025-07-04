@@ -4,13 +4,13 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login</title>
-  <link rel="stylesheet" href="auth.css">
+  <link rel="stylesheet" href="../CSS/auth.css">
   <link rel="icon" type="image/png" href="../images/FrostByte_logo_ABV.png">
 
   <!-- Firebase SDKs -->
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
   <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
-  <script src="firebase-config.js"></script>
+  <script src="../Java/firebase-config.js"></script>
 </head>
 
 <body>
@@ -22,7 +22,7 @@
         <input type="email" id="email" placeholder="Email" />
         <input type="password" id="password" placeholder="Password" />
         <button onclick="login()">Login</button>
-        <!-- <p>Don't have an account? <a href="signup.html">Sign up</a></p> -->
+        <!-- <p>Don't have an account? <a href="../Pages/signup.html">Sign up</a></p> -->
       </div>
     </div>
   </section>
@@ -34,7 +34,7 @@
 
       firebase.auth().signInWithEmailAndPassword(email, password)
         .then(() => {
-          window.location.href = "../dashboard.html";
+          window.location.href = "../Pages/dashboard.html";
         })
         .catch(error => {
           alert("Login failed: " + error.message);

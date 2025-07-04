@@ -4,20 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Dashboard</title>
-    <link rel="stylesheet" href="dashboard.css">
-    <link rel="icon" type="iamge/png" href="images/FrostByte_logo_ABV.png">
+    <link rel="stylesheet" href="../CSS/dashboard.css">
+    <link rel="icon" type="iamge/png" href="../images/FrostByte_logo_ABV.png">
 </head>
 <script>
   firebase.auth().onAuthStateChanged(user => {
     if (!user) {
-      window.location.href = "login.html"; // redirect if not logged in
+      window.location.href = "../login.html"; // redirect if not logged in
     }
   });
 </script>
 <body>
     <nav class="navbar">
         <div class="navbar-container">
-            <a href="" class="navbar-logo"><img src="images/Frostbyte_logo.png" alt="Navigation Logo"><a>
+            <a href="" class="navbar-logo"><img src="../images/Frostbyte_logo.png" alt="Navigation Logo"><a>
             <button class="navbar-toggle">
                 <span class="bar"></span>
                 <span class="bar"></span>
@@ -54,7 +54,7 @@
             </div>
         </div>
 
-<script src="dashboard.js"></script>
+<script src="../Java/dashboard.js"></script>
 </body>
 
 
