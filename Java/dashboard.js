@@ -41,14 +41,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Idle Timeout Logic Setup ---
     let idleTimeout;
-    const IDLE_LIMIT = 30 * 60 * 1000; // 30 minutes
+    const IDLE_LIMIT = 1 * 60 * 1000; // 1 minute
 
     function resetIdleTimer() {
         clearTimeout(idleTimeout);
         idleTimeout = setTimeout(() => {
             signOut(auth).then(() => {
                 alert("You have been logged out due to inactivity.");
-                window.location.href = "../login.html";
+                window.location.href = "login.html";
             });
         }, IDLE_LIMIT);
     }
@@ -73,7 +73,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (content) content.style.display = "block";
                     resetIdleTimer(); // Start inactivity timer
                 } else {
-                    window.location.href = "../login.html";
+                    window.location.href = "login.html";
                 }
                 });
         })
