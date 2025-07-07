@@ -1,4 +1,7 @@
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
+import { getAuth, setPersistence, browserSessionPersistence } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+
 const firebaseConfig = {
   apiKey: "AIzaSyCmWe5bJF9m6gRE4sg5WaiCs6wPrE21Qmg",
   authDomain: "frostbyte-test-6f9ae.firebaseapp.com",
@@ -9,4 +12,13 @@ const firebaseConfig = {
   measurementId: "G-QMHETXHVJY"
 };
 
-firebase.initializeApp(firebaseConfig);
+// Initialize Firebase
+const app = initializeApp(firebaseConfig);
+const auth = getAuth(app);
+
+// Set session-only persistence
+setPersistence(auth, browserSessionPersistence).catch(console.error);
+
+export { app, auth };
+
+

@@ -90,3 +90,10 @@ body {
     font-family: "Press Start 2P", cursive;
     color: white;
 }
+
+.error-message {
+    color: red;
+    display: none; /* Hide by default */
+    margin: 10px 0;
+    font-size: 14px;
+}

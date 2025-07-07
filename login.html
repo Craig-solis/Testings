@@ -1,45 +1,59 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Login</title>
-  <link rel="stylesheet" href="../CSS/auth.css">
-  <link rel="icon" type="image/png" href="../images/FrostByte_logo_ABV.png">
 
-  <!-- Firebase SDKs -->
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
-  <script src="../Java/firebase-config.js"></script>
+  <!-- Styles -->
+  <link rel="stylesheet" href="../CSS/auth.css" />
+  <link rel="icon" type="image/png" href="../images/FrostByte_logo_ABV.png" />
 </head>
 
 <body>
   <section class="auth-container">
-    <img src="../images/Frostbyte_logo.png" alt="FrostByte Logo">
+    <img src="../images/Frostbyte_logo.png" alt="FrostByte Logo" />
     <div class="authBox">
       <div class="authPrompt">
         <h3>Login</h3>
+        <h5 id="error-message" class="error-message">Invalid Credentials. Try Again.</h5>
         <input type="email" id="email" placeholder="Email" />
         <input type="password" id="password" placeholder="Password" />
-        <button onclick="login()">Login</button>
+        <button id="loginBtn">Login</button>
         <!-- <p>Don't have an account? <a href="../Pages/signup.html">Sign up</a></p> -->
       </div>
     </div>
   </section>
 
-  <script>
-    function login() {
-      const email = document.getElementById('email').value;
-      const password = document.getElementById('password').value;
+  <!-- Firebase + Login Logic -->
+  <script type="module">
+    import { auth } from "../Java/firebase-config.js";
+    import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
 
-      firebase.auth().signInWithEmailAndPassword(email, password)
+    document.getElementById("loginBtn").addEventListener("click", () => {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+      const errorMessage = document.getElementById("error-message");
+
+      // Hide error message initially
+      errorMessage.style.display = "none";
+
+      signInWithEmailAndPassword(auth, email, password)
         .then(() => {
           window.location.href = "../Pages/dashboard.html";
         })
         .catch(error => {
-          alert("Login failed: " + error.message);
+          // Show the error message
+          errorMessage.style.display = "block";
         });
-    }
+    });
+
+    // Allow login with Enter key
+    document.getElementById("password").addEventListener("keydown", (e) => {
+      if (e.key === "Enter") {
+        document.getElementById("loginBtn").click();
+      }
+    });
   </script>
 </body>
 </html>

@@ -12,8 +12,60 @@ body {
     font-family: "Jost", sans-serif;
     min-height: 100dvh;
     background: url(../images/Background.png) no-repeat center center/cover;
+    display: none; /* Hide content initially */
+}
+/* Loader Screen-----------------------*/
+/* Loader Container */
+#loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  z-index: 9999;
+  font-family: 'Segoe UI', sans-serif;
 }
 
+/* Spinner Animation */
+.spinner {
+  width: 60px;
+  height: 60px;
+  border: 6px solid #cccccc;
+  border-top-color: #007BFF;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 1rem;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Fallback Link Text */
+.fallback-link {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: #555555;
+}
+
+.fallback-link a {
+  color: #007BFF;
+  text-decoration: underline;
+  transition: color 0.2s ease;
+}
+
+.fallback-link a:hover {
+  color: #0056b3;
+}
+
+/* Navbar Styles--------------------------------*/
 .navbar {
     display: flex;
     align-items: center;

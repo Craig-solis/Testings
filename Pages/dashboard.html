@@ -1,77 +1,75 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Dashboard</title>
-    <link rel="stylesheet" href="../CSS/dashboard.css">
-    <link rel="icon" type="iamge/png" href="../images/FrostByte_logo_ABV.png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dashboard</title>
+
+  <!-- Styles & Icons -->
+  <link rel="stylesheet" href="../CSS/dashboard.css" />
+  <link rel="icon" type="image/png" href="../images/FrostByte_logo_ABV.png" />
 </head>
-<body >
-  <script src="../Java/dashboard.js"></script>
-  <script>
-    window.onload = function () {
-      firebase.auth().onAuthStateChanged(user => {
-        if (user) {
-          document.body.style.display = "block"; // show content only if user is authenticated
-        } else {
-          window.location.href = "../login.html"; // redirect if not
-        }
-      });
-    };
-  </script>
-  <nav class="navbar">
-        <div class="navbar-container">
-            <a href="" class="navbar-logo"><img src="../images/Frostbyte_logo.png" alt="Navigation Logo"><a>
-            <button class="navbar-toggle">
-                <span class="bar"></span>
-                <span class="bar"></span>
-                <span class="bar"></span>
-            </button>
-            <ul class="navbar-menu">
-                <li><a href="#" class="active">Home</a></li>
-                <li><a href="#">About</a></li>
-                <li><a href="#">Services</a></li>
-                <li><a href="#">Blog</a></li>
-                <li><a href="#">Contact</a></li>
-            </ul>
-        </div>
+
+<body>
+  <!-- Loader placeholder (optional, for auth fallback) -->
+  <div id="loader">
+    <div class="spinner"></div>
+    <p>Verifying session...</p>
+    <div class="fallback-link">
+      If nothing happens, <a href="../login.html">click here to log in</a>.
+    </div>
+  </div>
+
+  <!-- Main content hidden by default until auth confirmed -->
+  <div id="content" style="display: none;">
+    <nav class="navbar">
+      <div class="navbar-container">
+        <a href="#" class="navbar-logo">
+          <img src="../images/Frostbyte_logo.png" alt="Navigation Logo" />
+        </a>
+        <button class="navbar-toggle">
+          <span class="bar"></span>
+          <span class="bar"></span>
+          <span class="bar"></span>
+        </button>
+        <ul class="navbar-menu">
+          <li><a href="#" class="active">Home</a></li>
+          <li><a href="#">About</a></li>
+          <li><a href="#">Services</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
     </nav>
 
     <section class="hero-container">
-        <h1 class="hero-title">Welcome to <strong>YOUR</strong> New Favorite Page</h1>
-        <p>This was designed to have a space to bounce around ideas, design something cool, and make things a bit more interesting. <br><br>Take a look around and check out the forms I already have posted.</p>
+      <h1 class="hero-title">
+        Welcome to <strong>YOUR</strong> New Favorite Page
+      </h1>
+      <p>
+        This was designed to have a space to bounce around ideas, design something cool, and make things a bit more interesting. <br /><br />
+        Take a look around and check out the forms I already have posted.
+      </p>
     </section>
 
     <section class="cards-container">
-        <div class="card">
-            <!-- <div class="card-cover"></div> -->
-            <div class="card-content">
-                <h3>Agenda</h3>
-                <ol class="agendaList">
-                    <li>Breakfast</li>
-                    <li>Workout</li>
-                    <li>Pool Day with Drinks + Snacks + Dessert</li>
-                    <li>Freshen up and Relax</li>
-                    <li>Firework Show</li>
-                    <li>Late Night Movie and Chill</li>
-                </ol>
-            </div>
+      <div class="card">
+        <div class="card-content">
+          <h3>Agenda</h3>
+          <ol class="agendaList">
+            <li>Breakfast</li>
+            <li>Workout</li>
+            <li>Pool Day with Drinks + Snacks + Dessert</li>
+            <li>Freshen up and Relax</li>
+            <li>Firework Show</li>
+            <li>Late Night Movie and Chill</li>
+          </ol>
         </div>
+      </div>
+    </section>
+  </div>
 
-
+  <!-- Firebase & Dashboard Logic -->
+  <script type="module" src="../Java/dashboard.js"></script>
 </body>
-
-
 </html>
-
-<!-- Future logout Button
-<button onclick="logout()">Logout</button>
-<script>
-  function logout() {
-    firebase.auth().signOut().then(() => {
-      window.location.href = "login.html";
-    });
-  }
-</script>
--->
