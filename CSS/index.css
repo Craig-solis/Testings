@@ -9,4 +9,27 @@ body {
     min-height: 100dvh;
 }
 
+.index-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width:100%;
+    position: fixed;
+    padding: 1rem 2rem;
+    background-color: #f8f9fa;
+}
 
+.index-nav ul {
+    list-style: none;
+    display: flex;
+    gap: 1rem;
+}
+
+.index-nav ul li {
+    display: inline;
+}
+
+.index-nav img {
+    width: 32px;
+    height: 32px;
+}
