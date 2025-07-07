@@ -97,3 +97,10 @@ body {
     margin: 10px 0;
     font-size: 14px;
 }
+
+.success-message {
+    color: green;
+    display: none; /* Hide by default */
+    margin: 10px 0;
+    font-size: 14px;
+}
