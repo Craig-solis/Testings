@@ -8,7 +8,7 @@
     <link rel="icon" type="image/png" href="../images/FrostByte_logo_ABV.png">
     
     <!-- Firebase SDKs (removed compat) -->
-    <script type="module" src="../Java/auth.js"></script>
+    <script type="module"></script>
     <script type="module">
       import { auth } from "../Java/firebase-config.js";
       import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
@@ -50,7 +50,7 @@
         <div class="authBox">
             <div class="authPrompt">
                 <h3>Create Account</h3>
-                <h5 id="success-message">Account created successfully!</h5>
+                <h5 id="success-message" style="display:none;">Account created successfully!</h5>
                 <h5 id="error-message"></h5>
                 <input type="email" id="email" placeholder="Email" required />
                 <input type="password" id="password" placeholder="Password" required />
