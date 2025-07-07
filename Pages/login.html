@@ -20,13 +20,13 @@
         <input type="email" id="email" placeholder="Email" />
         <input type="password" id="password" placeholder="Password" />
         <button id="loginBtn">Login</button>
-        <!-- <p>Don't have an account? <a href="../Pages/signup.html">Sign up</a></p> -->
+        <p>Don't have an account? <a href="../Pages/signup.html">Sign up</a></p>
       </div>
     </div>
   </section>
 
   <!-- Firebase + Login Logic -->
-  <script type="module" src="../Java/auth.js"></script>
+  <!-- <script type="module" src="../Java/auth.js"></script> -->
   <script type="module">
     import { auth } from "../Java/firebase-config.js";
     import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
