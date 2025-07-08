@@ -11,13 +11,19 @@
 <body>
     <nav class="index-nav">
         <img src="../images/FrostByte_logo_ABV.png" alt="logo">
-        <ul>
+        <ul id="navMenu">
             <li><a href="#" class="active">Home</a></li>
             <li><a href="#">About</a></li>
             <li><a href="#">Services</a></li>
             <li><a href="../Pages/login.html">Login</a></li>
             <li><a href="../Pages/signup.html">Sign Up</a></li>
         </ul>
+        <button class="hamburger" id="navHamburger" aria-label="Open navigation menu">
+            <span class="bar"></span>
+            <span class="bar"></span>
+            <span class="bar"></span>
+        </button>
+        <div class="nav-overlay" id="navOverlay"></div>
     </nav>
     <div class="main-content">
         <h1>Welcome to FrostByte!</h1>
@@ -27,5 +33,25 @@
     <footer>
         &copy; 2025 FrostByte Inc. All rights reserved.
     </footer>
+    <script>
+      const hamburger = document.getElementById('navHamburger');
+      const navMenu = document.getElementById('navMenu');
+      const navOverlay = document.getElementById('navOverlay');
+      hamburger.addEventListener('click', () => {
+        navMenu.classList.toggle('open');
+        navOverlay.classList.toggle('active');
+      });
+      navOverlay.addEventListener('click', () => {
+        navMenu.classList.remove('open');
+        navOverlay.classList.remove('active');
+      });
+      // Optional: close menu on link click (mobile)
+      navMenu.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', () => {
+          navMenu.classList.remove('open');
+          navOverlay.classList.remove('active');
+        });
+      });
+    </script>
 </body>
 </html>

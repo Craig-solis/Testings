@@ -17,6 +17,7 @@ body {
   background: #1a2332;
   padding: 0.75rem 2rem;
   box-shadow: 0 2px 8px rgba(0,0,0,0.04);
+  position: relative;
 }
 .index-nav img {
   height: 48px;
@@ -27,6 +28,7 @@ body {
   gap: 2rem;
   margin: 0;
   padding: 0;
+  transition: left 0.3s;
 }
 .index-nav li {
   display: inline-block;
@@ -43,6 +45,31 @@ body {
 .index-nav a.active, .index-nav a:hover {
   background: #3a7bd5;
   color: #fff;
+}
+
+.hamburger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 1001;
+}
+.hamburger .bar {
+  width: 28px;
+  height: 4px;
+  background: #eaf6ff;
+  margin: 4px 0;
+  border-radius: 2px;
+  transition: all 0.3s;
 }
 
 .main-content {
@@ -95,21 +122,58 @@ footer {
 
 @media (max-width: 700px) {
   .index-nav {
-    flex-direction: column;
-    align-items: flex-start;
-    padding: 1rem;
+    flex-direction: row;
+    align-items: center;
+    padding: 0.75rem 1rem;
+  }
+  .hamburger {
+    display: flex;
+    position: absolute;
+    right: 1rem;
+    left: auto;
+    top: 50%;
+    transform: translateY(-50%);
   }
   .index-nav ul {
-    gap: 1rem;
+    flex-direction: column;
+    gap: 1.2rem;
+    position: fixed;
+    top: 0;
+    right: -100vw;
+    left: auto;
+    width: 20vw;
+    max-width: 320px;
+    height: 100vh;
+    background: #1a2332;
+    box-shadow: -2px 0 10px rgba(0,0,0,0.18);
+    padding: 4.5rem 2rem 2rem 2rem;
+    z-index: 1000;
+    transition: right 0.3s cubic-bezier(.4,2,.6,1);
   }
-  .main-content h1 {
-    font-size: 2rem;
+  .index-nav ul.open {
+    right: 0;
+    left: auto;
   }
-  .main-content p {
-    font-size: 1rem;
+  .index-nav img {
+    height: 40px;
   }
-  .cta-btn {
-    font-size: 1rem;
-    padding: 0.7rem 1.5rem;
+}
+
+.index-nav .nav-overlay {
+  display: none;
+}
+@media (max-width: 700px) {
+  .index-nav .nav-overlay {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: rgba(0,0,0,0.3);
+    z-index: 999;
+  }
+  .index-nav .nav-overlay.active {
+    display: block;
   }
 }
