@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <link rel="stylesheet" href="../CSS/admin-dashboard.css">
+    <link rel="icon" type="image/png" href="../images/FrostByte_logo_ABV.png">
+    <script type="module" src="../Java/admin.js"></script>
+</head>
+
+<body>
+    <nav class="admin-nav">
+        <ul>
+            <li><a href="dashboard.html">Dashboard</a></li>
+            <li><a href="manage-users.html">Manage Users</a></li>
+            <li><a href="view-reports.html">View Reports</a></li>
+        </ul>
+        <button id="signOutBtn" class="signout-btn">Sign Out</button>
+    </nav>
+    <section class="admin-hero">
+        <h1>Admin Dashboard</h1>
+        <p>Welcome to the admin dashboard. Here you can manage users and view reports.</p>
+    </section>
+    <div id="pending-users-section" class="user-management">
+        <h2>Pending User Approvals</h2>
+        <table id="pending-users-table">
+            <thead>
+                <tr>
+                    <th>Email</th>
+                    <th>Signup Date</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Populated by admin.js -->
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>

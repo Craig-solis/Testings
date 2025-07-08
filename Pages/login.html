@@ -26,35 +26,6 @@
   </section>
 
   <!-- Firebase + Login Logic -->
-  <!-- <script type="module" src="../Java/auth.js"></script> -->
-  <script type="module">
-    import { auth } from "../Java/firebase-config.js";
-    import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
-
-    document.getElementById("loginBtn").addEventListener("click", () => {
-      const email = document.getElementById("email").value;
-      const password = document.getElementById("password").value;
-      const errorMessage = document.getElementById("error-message");
-
-      // Hide error message initially
-      errorMessage.style.display = "none";
-
-      signInWithEmailAndPassword(auth, email, password)
-        .then(() => {
-          window.location.href = "../Pages/dashboard.html";
-        })
-        .catch(error => {
-          // Show the error message
-          errorMessage.style.display = "block";
-        });
-    });
-
-    // Allow login with Enter key
-    document.getElementById("password").addEventListener("keydown", (e) => {
-      if (e.key === "Enter") {
-        document.getElementById("loginBtn").click();
-      }
-    });
-  </script>
+  <script type="module" src="../Java/login.js"></script>
 </body>
 </html>

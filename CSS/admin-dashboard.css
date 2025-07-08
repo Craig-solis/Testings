@@ -1,0 +1,142 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Jost", sans-serif;
+    min-height: 100dvh;
+    background: url(../images/Admin_bkg.png);
+    background-size: cover;
+    background-position: center;
+}
+/*------Admin Navigation---------------------*/
+.admin-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    position: fixed;
+    padding: 1rem;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.admin-nav ul {
+    list-style: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+}
+
+.admin-nav ul li a {
+    display: inline;
+    text-decoration: none;
+    color: white;
+    font-size: 1.2rem;
+}
+
+.admin-nav ul li a:hover {
+    color: white;
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff;
+}
+
+.signout-btn {
+    background: none;
+    border:none;
+    display: inline;
+    text-decoration: none;
+    color: white;
+    font-size: 1rem;
+    cursor: pointer;
+    margin-left: 16px;
+    position: absolute;
+    right: 2rem;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.signout-btn:hover {
+    color: white;
+    text-shadow: 0 0 10px #fff, 0 0 20px #fff;
+}
+
+/*------Hero Section-----------------------*/
+.admin-hero {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 70vh;
+}
+
+.admin-hero h1 {
+    font-size: 3rem;
+    color:white;
+    text-shadow: 0 0 10px #fff, 0 0 10px black;
+}
+
+.admin-hero p {
+    font-size: 1.5rem;
+    color: white;
+    text-align: center;
+    margin-top: 1rem;
+}
+
+/*----User Management Section-----------*/
+.user-management {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+}
+.user-management h2 {
+    font-size: 2rem;
+    color: white;
+    margin-bottom: 1rem;
+}
+.user-management table {
+    width: 100%;
+    max-width: 800px;
+    border-collapse: collapse;
+    
+}
+.user-management table th,
+.user-management table td {
+    padding: 1rem;
+    border: 1px solid #ccc;
+    text-align: center;
+    color: white;
+    backdrop-filter: blur(10px);
+}
+.user-management table th {
+    background-color: #f4f4f4;
+    color: #333;
+}
+.approvalBtn {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+.approvalBtn:hover {
+    background-color: #45a049;
+}
+
+.rejectBtn {
+    background-color: #f44336;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+.rejectBtn:hover {
+    background-color: #d32f2f;
+}

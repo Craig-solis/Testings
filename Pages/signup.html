@@ -8,41 +8,7 @@
     <link rel="icon" type="image/png" href="../images/FrostByte_logo_ABV.png">
     
     <!-- Firebase SDKs (removed compat) -->
-    <script type="module"></script>
-    <script type="module">
-      import { auth } from "../Java/firebase-config.js";
-      import { createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
-
-      document.getElementById("signupBtn").addEventListener("click", signUp);
-
-      function signUp() {
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
-        const successMessage = document.getElementById('success-message');
-        const errorMessage = document.getElementById('error-message');
-        successMessage.style.display = "none";
-        errorMessage.style.display = "none";
-
-        createUserWithEmailAndPassword(auth, email, password)
-          .then(() => {
-            successMessage.style.display = "block";
-            setTimeout(() => {
-              window.location.href = "dashboard.html";
-            }, 2000);
-          })
-          .catch(error => {
-            errorMessage.textContent = error.message;
-            errorMessage.style.display = "block";
-          });
-      }
-
-      // Allow signup with Enter key
-      document.getElementById("password").addEventListener("keydown", (e) => {
-        if (e.key === "Enter") {
-          document.getElementById("signupBtn").click();
-        }
-      });
-    </script>
+    <script type="module" src="../Java/signup.js"></script>
 </head>
 <body>
     <section class="auth-container">
@@ -51,7 +17,7 @@
             <div class="authPrompt">
                 <h3>Create Account</h3>
                 <h5 id="success-message" style="display:none;">Account created successfully!</h5>
-                <h5 id="error-message"></h5>
+                <h5 id="error-message" class="error-message"></h5>
                 <input type="email" id="email" placeholder="Email" required />
                 <input type="password" id="password" placeholder="Password" required />
                 <button id="signupBtn">Sign Up</button>
