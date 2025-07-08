@@ -1,120 +1,115 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
+/* index.css - General styles for FrostByte landing page */
 
 body {
-    font-family: "Jost", sans-serif;
-    min-height: 100dvh;
-    background: linear-gradient(135deg, #e0e7ff 0%, #f8fafc 100%);
-    color: #222;
-    display: flex;
-    flex-direction: column;
-    min-height: 100vh;
+  margin: 0;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background: #f7fafd;
+  color: #222;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
 }
 
 .index-nav {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    padding: 1rem 2rem;
-    background: rgba(255,255,255,0.95);
-    box-shadow: 0 2px 8px rgba(0,0,0,0.07);
-    z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #1a2332;
+  padding: 0.75rem 2rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.04);
 }
-
-.index-nav ul {
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: flex-start;
-    padding-left: 0;
-    margin: 0;
-}
-
-.index-nav ul li {
-    display: inline-flex;
-    align-items: center;
-    margin-bottom: 0.5rem;
-}
-
-.index-nav ul li a {
-    text-decoration: none;
-    color: #143e6d;
-    font-size: 1rem;
-    font-weight: 500;
-    padding: 6px 18px;
-    border-radius: 20px;
-    transition: background 0.2s, color 0.2s;
-    white-space: nowrap;
-}
-
-.index-nav ul li a:hover {
-    background: #143e6d;
-    color: #fff;
-}
-
 .index-nav img {
-    width: 80px;
-    height: 60px;
+  height: 48px;
+}
+.index-nav ul {
+  list-style: none;
+  display: flex;
+  gap: 2rem;
+  margin: 0;
+  padding: 0;
+}
+.index-nav li {
+  display: inline-block;
+}
+.index-nav a {
+  color: #eaf6ff;
+  text-decoration: none;
+  font-weight: 500;
+  font-size: 1.1rem;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  transition: background 0.2s, color 0.2s;
+}
+.index-nav a.active, .index-nav a:hover {
+  background: #3a7bd5;
+  color: #fff;
 }
 
 .main-content {
-    margin-top: 90px;
-    flex: 1 0 auto;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    min-height: 0;
-    padding: 2rem;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 3rem 1rem 2rem 1rem;
 }
-
 .main-content h1 {
-    font-size: 2.5rem;
-    color: #143e6d;
-    margin-bottom: 1.2rem;
-    font-weight: 700;
-    letter-spacing: 1px;
+  font-size: 2.8rem;
+  margin-bottom: 1rem;
+  color: #1a2332;
+  letter-spacing: 1px;
 }
-
 .main-content p {
-    font-size: 1.25rem;
-    color: #333;
-    max-width: 600px;
-    text-align: center;
-    margin-bottom: 2rem;
+  font-size: 1.2rem;
+  margin-bottom: 2rem;
+  color: #3a3a3a;
 }
-
 .cta-btn {
-    background: #143e6d;
-    color: #fff;
-    border: none;
-    border-radius: 25px;
-    padding: 0.75rem 2.2rem;
-    font-size: 1.1rem;
-    font-weight: 600;
-    cursor: pointer;
-    box-shadow: 0 2px 8px rgba(20,62,109,0.08);
-    transition: background 0.2s, transform 0.2s;
+  display: inline-block;
+  background: linear-gradient(90deg, #3a7bd5 0%, #00d2ff 100%);
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 0.8rem 2.2rem;
+  border: none;
+  border-radius: 30px;
+  box-shadow: 0 2px 8px rgba(58,123,213,0.08);
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.2s, box-shadow 0.2s;
 }
 .cta-btn:hover {
-    background: #1e56a0;
-    transform: translateY(-2px) scale(1.04);
+  background: linear-gradient(90deg, #00d2ff 0%, #3a7bd5 100%);
+  box-shadow: 0 4px 16px rgba(58,123,213,0.15);
 }
 
 footer {
-    text-align: center;
-    padding: 1.5rem 0 0.5rem 0;
-    color: #888;
+  background: #1a2332;
+  color: #eaf6ff;
+  text-align: center;
+  padding: 1rem 0;
+  font-size: 1rem;
+  margin-top: auto;
+}
+
+@media (max-width: 700px) {
+  .index-nav {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 1rem;
+  }
+  .index-nav ul {
+    gap: 1rem;
+  }
+  .main-content h1 {
+    font-size: 2rem;
+  }
+  .main-content p {
     font-size: 1rem;
-    flex-shrink: 0;
-    background: transparent;
-    margin-top: auto;
+  }
+  .cta-btn {
+    font-size: 1rem;
+    padding: 0.7rem 1.5rem;
+  }
 }

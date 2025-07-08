@@ -1,3 +1,5 @@
+// dashboard.js - User dashboard logic
+
 import { auth } from "../Java/firebase-config.js";
 import { getFirestore, doc, getDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
 import { onAuthStateChanged, signOut } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";

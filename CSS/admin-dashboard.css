@@ -1,3 +1,5 @@
+/* admin-dashboard.css - Styles for admin dashboard */
+
 * {
     margin: 0;
     padding: 0;
@@ -22,6 +24,7 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: flex-start;
     padding: 2rem 1rem 1rem 1rem;
     min-height: 100vh;
     box-shadow: 2px 0 10px rgba(0,0,0,0.12);
@@ -42,6 +45,13 @@ body {
 }
 
 /* Sidebar Menu */
+.sidebar-menu {
+    flex: 1 1 auto;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+}
 .sidebar-menu ul {
     list-style: none;
     display: flex;
@@ -77,17 +87,28 @@ body {
     color: #fff;
 }
 .signout-btn {
-    margin-top: 2rem;
+    position: absolute;
+    left: 0.75rem;
+    right: 0.75rem;
+    bottom: 2rem;
+    margin-top: 0;
+    margin-bottom: 0;
+    align-self: center;
     color: #fff;
-    font-size: 1.1rem;
+    font-size: 1.05rem;
     background: #f44336;
     border: none;
     border-radius: 8px;
-    padding: 0.75rem 1.2rem;
+    padding: 0.65rem 1rem;
     cursor: pointer;
     transition: background 0.2s;
-    width: 100%;
+    width: calc(100% - 1.5rem);
+    max-width: 210px;
     text-align: left;
+    box-shadow: 0 2px 8px rgba(244,67,54,0.08);
+    z-index: 20;
+    overflow: hidden;
+    white-space: nowrap;
 }
 .signout-btn:hover {
     background: #b71c1c;
@@ -335,6 +356,10 @@ body {
         z-index: 1000;
         background: rgba(20, 62, 109, 0.98);
         padding-top: 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: flex-start;
     }
     .admin-sidebar.open {
         transform: translateX(0);
@@ -345,6 +370,21 @@ body {
     .admin-main {
         padding: 2rem 1rem;
         margin-left: 0;
+    }
+    .sidebar-menu {
+        flex: 1 1 auto;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+    .signout-btn {
+        left: 0.75rem;
+        right: 0.75rem;
+        width: calc(100% - 1.5rem);
+        max-width: 180px;
+        font-size: 1rem;
+        padding: 0.6rem 0.9rem;
     }
     .sidebar-overlay {
         display: none;

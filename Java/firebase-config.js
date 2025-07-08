@@ -1,3 +1,5 @@
+// firebase-config.js - Firebase configuration
+
 // For Firebase JS SDK v7.20.0 and later, measurementId is optional
 import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-app.js";
 import { getAuth, setPersistence, browserSessionPersistence } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";

@@ -1,3 +1,5 @@
+// auth.js - Authentication logic
+
 import { auth } from './firebase-config.js';
 import {
   onAuthStateChanged,
