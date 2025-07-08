@@ -116,7 +116,7 @@ function renderAllUsers(usersSnapshot) {
     tr.innerHTML = `
       <td>${user.email}</td>
       <td>${user.role || "-"}</td>
-      <td>${user.otherAttributes ? JSON.stringify(user.otherAttributes) : "-"}</td>
+      <td>${user.createdDate ? user.createdDate : "-"}</td>
       <td>
         <div class="user-actions">
           <button class="dots-btn" aria-label="User actions" onclick="toggleDropdown(event, '${userDoc.id}')">&#8942;</button>
@@ -187,7 +187,6 @@ function renderPendingUsers(usersSnapshot) {
       const tr = document.createElement("tr");
       tr.innerHTML = `
         <td>${user.email}</td>
-        <td>${user.createdAt || ""}</td>
         <td>
           <button class="approvalBtn" onclick="approveUser('${userDoc.id}')">Approve</button>
           <button class="rejectBtn" onclick="rejectUser('${userDoc.id}')">Reject</button>
@@ -212,9 +211,10 @@ window.approveUser = async function(uid) {
 window.rejectUser = async function(uid) {
   try {
     await updateDoc(doc(db, "users", uid), { role: "rejected" });
-    alert('User rejected.');
+    await import('https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js').then(({ deleteDoc }) => deleteDoc(doc(db, "users", uid)));
+    alert('User rejected and deleted from Firestore.');
   } catch (err) {
-    alert('Error rejecting user: ' + err.message);
+    alert('Error rejecting/deleting user: ' + err.message);
   }
 };
 

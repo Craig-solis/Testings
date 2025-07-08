@@ -174,7 +174,7 @@ body {
 #all-users-table td,
 #pending-users-table th,
 #pending-users-table td {
-    padding: 1.5rem 1.25rem;
+    padding: 1.5rem;
     border: 1px solid #ccc;
     text-align: center;
     color: #143e6d;

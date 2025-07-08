@@ -27,10 +27,12 @@ async function signUp() {
     const userRef = doc(db, "users", userCredential.user.uid);
     const userSnap = await getDoc(userRef);
     if (!userSnap.exists()) {
+      const now = new Date();
+      const createdDate = now.toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' });
       await setDoc(userRef, {
         email: email,
         role: "pending",
-        createdAt: new Date()
+        createdDate: createdDate
       });
     }
     successMessage.textContent = "Signup request sent! Await admin approval.";
