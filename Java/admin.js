@@ -28,17 +28,74 @@ onAuthStateChanged(auth, async (user) => {
   initAdminDashboard();
 });
 
+// Hamburger menu logic for sidebar (mobile)
+document.addEventListener('DOMContentLoaded', () => {
+    const sidebarToggle = document.getElementById('sidebarToggle');
+    const adminSidebar = document.getElementById('adminSidebar');
+    const sidebarOverlay = document.getElementById('sidebarOverlay');
+    if (sidebarToggle && adminSidebar && sidebarOverlay) {
+        sidebarToggle.addEventListener('click', () => {
+            adminSidebar.classList.toggle('open');
+            sidebarOverlay.classList.toggle('active');
+        });
+        sidebarOverlay.addEventListener('click', () => {
+            adminSidebar.classList.remove('open');
+            sidebarOverlay.classList.remove('active');
+        });
+    }
+});
+
 function initAdminDashboard() {
-  // Listen for real-time updates
+  // Tab elements
+  const dashboardTab = document.getElementById("dashboardTab");
+  const manageUsersTab = document.getElementById("manageUsersTab");
+  const viewReportsTab = document.getElementById("viewReportsTab");
+  const dashboardSection = document.getElementById("dashboard-section");
+  const manageUsersSection = document.getElementById("manage-users-section");
+  const viewReportsSection = document.getElementById("view-reports-section");
+
+  // Helper to show only the selected section
+  function showSection(section) {
+    dashboardSection.style.display = "none";
+    manageUsersSection.style.display = "none";
+    viewReportsSection.style.display = "none";
+    section.style.display = "block";
+  }
+
+  // Helper to highlight only the selected tab
+  function setActiveTab(tab) {
+    [dashboardTab, manageUsersTab, viewReportsTab].forEach(t => t.classList.remove("active"));
+    tab.classList.add("active");
+  }
+
+  // Dashboard tab
+  dashboardTab.addEventListener("click", (e) => {
+    e.preventDefault();
+    showSection(dashboardSection);
+    setActiveTab(dashboardTab);
+  });
+
+  // Manage Users tab
+  manageUsersTab.addEventListener("click", (e) => {
+    e.preventDefault();
+    showSection(manageUsersSection);
+    setActiveTab(manageUsersTab);
+    fetchAndRenderAllUsers();
+  });
+
+  // View Reports tab
+  viewReportsTab.addEventListener("click", (e) => {
+    e.preventDefault();
+    showSection(viewReportsSection);
+    setActiveTab(viewReportsTab);
+  });
+
+  // Show dashboard by default
+  showSection(dashboardSection);
+  setActiveTab(dashboardTab);
+
+  // Listen for real-time updates for pending users
   onSnapshot(collection(db, "users"), renderPendingUsers);
-
-  window.approveUser = async function(uid) {
-    await updateDoc(doc(db, "users", uid), { role: "user" });
-  };
-
-  window.rejectUser = async function(uid) {
-    await updateDoc(doc(db, "users", uid), { role: "rejected" });
-  };
 
   // Signout Logic
   const signOutBtn = document.getElementById("signOutBtn");
@@ -50,6 +107,59 @@ function initAdminDashboard() {
     });
   }
 }
+
+// Fetch and render all users for management
+async function fetchAndRenderAllUsers() {
+  const usersCol = collection(db, "users");
+  const usersSnapshot = await onSnapshot(usersCol, (snapshot) => {
+    renderAllUsers(snapshot);
+  });
+}
+
+function renderAllUsers(usersSnapshot) {
+  const tbody = document.getElementById("all-users-table").querySelector("tbody");
+  tbody.innerHTML = "";
+  usersSnapshot.forEach((userDoc) => {
+    const user = userDoc.data();
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <td>${user.email}</td>
+      <td>${user.role || "-"}</td>
+      <td>${user.otherAttributes ? JSON.stringify(user.otherAttributes) : "-"}</td>
+      <td>
+        <div class="user-actions">
+          <button class="dots-btn" aria-label="User actions" onclick="toggleDropdown(event, '${userDoc.id}')">&#8942;</button>
+          <div class="dropdown" id="dropdown-${userDoc.id}">
+            <button onclick="changeUserRole('${userDoc.id}', 'admin')">Make Admin</button>
+            <button onclick="changeUserRole('${userDoc.id}', 'user')">Make User</button>
+            <button onclick="changeUserRole('${userDoc.id}', 'pending')">Set Pending</button>
+          </div>
+        </div>
+      </td>
+    `;
+    tbody.appendChild(tr);
+  });
+}
+
+// Dropdown logic for user actions
+window.toggleDropdown = function(event, userId) {
+  event.stopPropagation();
+  // Close any open dropdowns first
+  document.querySelectorAll('.user-actions .dropdown').forEach(drop => drop.classList.remove('show'));
+  const dropdown = document.getElementById(`dropdown-${userId}`);
+  if (dropdown) {
+    dropdown.classList.toggle('show');
+  }
+};
+
+document.addEventListener('click', function() {
+  document.querySelectorAll('.user-actions .dropdown').forEach(drop => drop.classList.remove('show'));
+});
+
+// Change user role
+window.changeUserRole = async function(userId, newRole) {
+  await updateDoc(doc(db, "users", userId), { role: newRole });
+};
 
 function renderPendingUsers(usersSnapshot) {
   const tbody = document.getElementById("pending-users-table").querySelector("tbody");

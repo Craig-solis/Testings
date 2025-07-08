@@ -3,7 +3,6 @@
     padding: 0;
     box-sizing: border-box;
 }
-
 body {
     font-family: "Jost", sans-serif;
     min-height: 100dvh;
@@ -11,110 +10,230 @@ body {
     background-size: cover;
     background-position: center;
 }
-/*------Admin Navigation---------------------*/
-.admin-nav {
+
+/* Layout Containers */
+.admin-portal-container {
+    display: flex;
+    min-height: 100vh;
+}
+.admin-sidebar {
+    width: 250px;
+    background: rgba(20, 62, 109, 0.98);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem 1rem 1rem 1rem;
+    min-height: 100vh;
+    box-shadow: 2px 0 10px rgba(0,0,0,0.12);
+    position: relative;
+    z-index: 10;
+}
+.sidebar-logo {
+    margin-bottom: 2.5rem;
+    width: 100%;
     display: flex;
     justify-content: center;
-    align-items: center;
-    width: 100%;
-    position: fixed;
-    padding: 1rem;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+}
+.sidebar-logo img {
+    width: 70px;
+    height: 70px;
+    border-radius: 16px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.10);
 }
 
-.admin-nav ul {
+/* Sidebar Menu */
+.sidebar-menu ul {
     list-style: none;
     display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 2rem;
+    flex-direction: column;
+    gap: 1.5rem;
+    width: 100%;
+    padding: 0;
+    margin: 0;
 }
-
-.admin-nav ul li a {
-    display: inline;
-    text-decoration: none;
-    color: white;
-    font-size: 1.2rem;
+.sidebar-menu ul li {
+    width: 100%;
 }
-
-.admin-nav ul li a:hover {
-    color: white;
-    text-shadow: 0 0 10px #fff, 0 0 20px #fff;
-}
-
-.signout-btn {
+.sidebar-menu ul li a,
+.sidebar-menu ul li button {
+    display: block;
+    width: 100%;
     background: none;
-    border:none;
-    display: inline;
-    text-decoration: none;
-    color: white;
-    font-size: 1rem;
+    border: none;
+    color: #fff;
+    font-size: 1.1rem;
+    text-align: left;
+    padding: 0.75rem 1.2rem;
+    border-radius: 8px;
     cursor: pointer;
-    margin-left: 16px;
-    position: absolute;
-    right: 2rem;
-    top: 50%;
-    transform: translateY(-50%);
+    transition: background 0.2s, color 0.2s;
+    text-decoration: none;
+    font-family: inherit;
+}
+.sidebar-menu ul li a.active,
+.sidebar-menu ul li a:hover,
+.sidebar-menu ul li button:hover {
+    background: #1e56a0;
+    color: #fff;
+}
+.signout-btn {
+    margin-top: 2rem;
+    color: #fff;
+    font-size: 1.1rem;
+    background: #f44336;
+    border: none;
+    border-radius: 8px;
+    padding: 0.75rem 1.2rem;
+    cursor: pointer;
+    transition: background 0.2s;
+    width: 100%;
+    text-align: left;
 }
 .signout-btn:hover {
-    color: white;
-    text-shadow: 0 0 10px #fff, 0 0 20px #fff;
+    background: #b71c1c;
+    color: #fff;
 }
 
-/*------Hero Section-----------------------*/
-.admin-hero {
+/* Main Content */
+.admin-main {
+    flex: 1 1 0;
+    padding: 3rem 2rem 2rem 2rem;
+    min-width: 0;
+    margin-left: 0;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    height: 70vh;
+    align-items: flex-start;
 }
-
-.admin-hero h1 {
-    font-size: 3rem;
-    color:white;
-    text-shadow: 0 0 10px #fff, 0 0 10px black;
-}
-
-.admin-hero p {
-    font-size: 1.5rem;
-    color: white;
+.portal-title {
+    font-size: 2.5rem;
     text-align: center;
-    margin-top: 1rem;
+    width: 100%;
+    color: #143e6d;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    letter-spacing: 1px;
+    text-shadow: 0 2px 8px rgba(0,0,0,0.08);
 }
 
-/*----User Management Section-----------*/
-.user-management {
+/* Section Styles */
+#dashboard-section,
+#manage-users-section,
+#view-reports-section {
+    width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    padding: 2rem;
+    align-items: flex-start;
+    justify-content: flex-start;
+    padding: 2rem 0 0 0;
+    position: relative;
+    z-index: 1;
+    overflow: visible;
 }
-.user-management h2 {
-    font-size: 2rem;
-    color: white;
+#manage-users-section h2,
+#view-reports-section h2 {
+    font-size: 1.5rem;
+    color: #143e6d;
     margin-bottom: 1rem;
 }
-.user-management table {
+
+/* Tables */
+#all-users-table,
+#pending-users-table {
     width: 100%;
-    max-width: 800px;
+    table-layout: fixed;
     border-collapse: collapse;
-    
+    background: rgba(255,255,255,0.85);
+    border-radius: 8px;
+    overflow: visible;
+    position: relative;
+    z-index: 1;
+    margin-bottom: 2rem;
 }
-.user-management table th,
-.user-management table td {
-    padding: 1rem;
+#all-users-table th,
+#all-users-table td,
+#pending-users-table th,
+#pending-users-table td {
+    padding: 1.5rem 1.25rem;
     border: 1px solid #ccc;
     text-align: center;
-    color: white;
+    color: #143e6d;
     backdrop-filter: blur(10px);
+    word-break: break-word;
+    position: relative;
+    overflow: visible;
+    z-index: 1;
 }
-.user-management table th {
+#all-users-table th,
+#pending-users-table th {
     background-color: #f4f4f4;
     color: #333;
 }
+#all-users-table tbody,
+#pending-users-table tbody {
+    position: relative;
+    overflow: visible;
+    z-index: 1;
+}
+#all-users-table tr,
+#pending-users-table tr {
+    position: relative;
+    overflow: visible;
+    z-index: 1;
+}
+
+/* User Actions Dropdown */
+.user-actions {
+    position: relative;
+    z-index: 1;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.user-actions .dots-btn {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5rem;
+    padding: 0.25rem 0.5rem;
+    color: #143e6d;
+    border-radius: 50%;
+    transition: background 0.2s;
+}
+.user-actions .dots-btn:hover {
+    background: #e0e0e0;
+}
+.user-actions .dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 2.2rem;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.10);
+    min-width: 140px;
+    z-index: 99999 !important;
+}
+.user-actions .dropdown.show {
+    display: block;
+}
+.user-actions .dropdown button {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 0.75rem 1rem;
+    text-align: left;
+    color: #143e6d;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 0;
+    transition: background 0.2s;
+}
+.user-actions .dropdown button:hover {
+    background: #f4f4f4;
+}
+
+/* Approval/Reject Buttons */
 .approvalBtn {
     background-color: #4CAF50;
     color: white;
@@ -127,7 +246,6 @@ body {
 .approvalBtn:hover {
     background-color: #45a049;
 }
-
 .rejectBtn {
     background-color: #f44336;
     color: white;
@@ -139,4 +257,73 @@ body {
 }
 .rejectBtn:hover {
     background-color: #d32f2f;
+}
+
+/* Hamburger menu styles */
+.hamburger {
+    display: none;
+    position: fixed;
+    top: 1.5rem;
+    left: 1.5rem;
+    width: 40px;
+    height: 40px;
+    z-index: 1001;
+    background: none;
+    border: none;
+    cursor: pointer;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.hamburger .bar {
+    width: 28px;
+    height: 4px;
+    background: #143e6d;
+    margin: 4px 0;
+    border-radius: 2px;
+    transition: all 0.3s;
+}
+
+/* Responsive Styles */
+@media (max-width: 900px) {
+    .admin-portal-container {
+        flex-direction: column;
+    }
+    .admin-sidebar {
+        position: fixed;
+        left: 0;
+        top: 0;
+        height: 100vh;
+        width: 220px;
+        min-width: 0;
+        transform: translateX(-100%);
+        transition: transform 0.3s cubic-bezier(.4,2,.6,1);
+        box-shadow: 2px 0 10px rgba(0,0,0,0.18);
+        z-index: 1000;
+        background: rgba(20, 62, 109, 0.98);
+        padding-top: 2rem;
+    }
+    .admin-sidebar.open {
+        transform: translateX(0);
+    }
+    .hamburger {
+        display: flex;
+    }
+    .admin-main {
+        padding: 2rem 1rem;
+        margin-left: 0;
+    }
+    .sidebar-overlay {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background: rgba(0,0,0,0.3);
+        z-index: 999;
+    }
+    .sidebar-overlay.active {
+        display: block;
+    }
 }

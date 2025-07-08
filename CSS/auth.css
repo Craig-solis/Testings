@@ -21,8 +21,15 @@ body {
     justify-content: center;      /* Center horizontally */
     flex-direction: column;
 }
+.auth-container a {
+    text-decoration: none;
+    color: white;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+}
 
-.auth-container img {
+.auth-container a img {
     margin-bottom: 20px;
     width: 50dvw;
     max-width: 600px;

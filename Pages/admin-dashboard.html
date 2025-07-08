@@ -8,34 +8,64 @@
     <link rel="icon" type="image/png" href="../images/FrostByte_logo_ABV.png">
     <script type="module" src="../Java/admin.js"></script>
 </head>
-
 <body>
-    <nav class="admin-nav">
-        <ul>
-            <li><a href="dashboard.html">Dashboard</a></li>
-            <li><a href="manage-users.html">Manage Users</a></li>
-            <li><a href="view-reports.html">View Reports</a></li>
-        </ul>
-        <button id="signOutBtn" class="signout-btn">Sign Out</button>
-    </nav>
-    <section class="admin-hero">
-        <h1>Admin Dashboard</h1>
-        <p>Welcome to the admin dashboard. Here you can manage users and view reports.</p>
-    </section>
-    <div id="pending-users-section" class="user-management">
-        <h2>Pending User Approvals</h2>
-        <table id="pending-users-table">
-            <thead>
-                <tr>
-                    <th>Email</th>
-                    <th>Signup Date</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                <!-- Populated by admin.js -->
-            </tbody>
-        </table>
+    <button class="hamburger" id="sidebarToggle" aria-label="Open sidebar">
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+    </button>
+    <div class="sidebar-overlay" id="sidebarOverlay"></div>
+    <div class="admin-portal-container">
+        <aside class="admin-sidebar" id="adminSidebar">
+            <div class="sidebar-logo">
+                <img src="../images/FrostByte_logo_ABV.png" alt="Logo">
+            </div>
+            <nav class="sidebar-menu">
+                <ul>
+                    <li><a href="#" id="dashboardTab" class="active">Dashboard</a></li>
+                    <li><a href="#" id="manageUsersTab">Manage Users</a></li>
+                    <li><a href="#" id="viewReportsTab">View Reports</a></li>
+                    <li><button id="signOutBtn" class="signout-btn">Sign Out</button></li>
+                </ul>
+            </nav>
+        </aside>
+        <main class="admin-main">
+            <h1 class="portal-title">Admin Portal</h1>
+            <section id="dashboard-section">
+                <!-- Dashboard content here if needed -->
+            </section>
+            <section id="manage-users-section" style="display:none;">
+                <h2>All Users</h2>
+                <table id="all-users-table">
+                    <thead>
+                        <tr>
+                            <th>Email</th>
+                            <th>Role</th>
+                            <th>Other Attributes</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Populated by admin.js -->
+                    </tbody>
+                </table>
+            </section>
+            <section id="view-reports-section" style="display:none;">
+                <h2>Pending User Approvals</h2>
+                <table id="pending-users-table">
+                    <thead>
+                        <tr>
+                            <th>Email</th>
+                            <th>Signup Date</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <!-- Populated by admin.js -->
+                    </tbody>
+                </table>
+            </section>
+        </main>
     </div>
 </body>
 </html>
