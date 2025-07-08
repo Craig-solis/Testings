@@ -11,9 +11,7 @@ let isSigningOut = false; // Flag to suppress alert on sign out
 // Admin-only access check
 onAuthStateChanged(auth, async (user) => {
   if (!user) {
-    if (!isSigningOut) {
-      alert("Access Denied");
-    }
+    if (!isSigningOut) alert("Access Denied");
     window.location.href = "../index.html";
     return;
   }
@@ -23,26 +21,25 @@ onAuthStateChanged(auth, async (user) => {
     window.location.href = "../index.html";
     return;
   }
-  // If admin, show content and run main admin logic
   document.body.style.display = "block";
   initAdminDashboard();
 });
 
-// Hamburger menu logic for sidebar (mobile)
+// Sidebar hamburger menu (mobile)
 document.addEventListener('DOMContentLoaded', () => {
-    const sidebarToggle = document.getElementById('sidebarToggle');
-    const adminSidebar = document.getElementById('adminSidebar');
-    const sidebarOverlay = document.getElementById('sidebarOverlay');
-    if (sidebarToggle && adminSidebar && sidebarOverlay) {
-        sidebarToggle.addEventListener('click', () => {
-            adminSidebar.classList.toggle('open');
-            sidebarOverlay.classList.toggle('active');
-        });
-        sidebarOverlay.addEventListener('click', () => {
-            adminSidebar.classList.remove('open');
-            sidebarOverlay.classList.remove('active');
-        });
-    }
+  const sidebarToggle = document.getElementById('sidebarToggle');
+  const adminSidebar = document.getElementById('adminSidebar');
+  const sidebarOverlay = document.getElementById('sidebarOverlay');
+  if (sidebarToggle && adminSidebar && sidebarOverlay) {
+    sidebarToggle.addEventListener('click', () => {
+      adminSidebar.classList.toggle('open');
+      sidebarOverlay.classList.toggle('active');
+    });
+    sidebarOverlay.addEventListener('click', () => {
+      adminSidebar.classList.remove('open');
+      sidebarOverlay.classList.remove('active');
+    });
+  }
 });
 
 function initAdminDashboard() {
@@ -54,7 +51,7 @@ function initAdminDashboard() {
   const manageUsersSection = document.getElementById("manage-users-section");
   const viewReportsSection = document.getElementById("view-reports-section");
 
-  // Helper to show only the selected section
+  // Show only the selected section
   function showSection(section) {
     dashboardSection.style.display = "none";
     manageUsersSection.style.display = "none";
@@ -62,28 +59,23 @@ function initAdminDashboard() {
     section.style.display = "block";
   }
 
-  // Helper to highlight only the selected tab
+  // Highlight only the selected tab
   function setActiveTab(tab) {
     [dashboardTab, manageUsersTab, viewReportsTab].forEach(t => t.classList.remove("active"));
     tab.classList.add("active");
   }
 
-  // Dashboard tab
   dashboardTab.addEventListener("click", (e) => {
     e.preventDefault();
     showSection(dashboardSection);
     setActiveTab(dashboardTab);
   });
-
-  // Manage Users tab
   manageUsersTab.addEventListener("click", (e) => {
     e.preventDefault();
     showSection(manageUsersSection);
     setActiveTab(manageUsersTab);
     fetchAndRenderAllUsers();
   });
-
-  // View Reports tab
   viewReportsTab.addEventListener("click", (e) => {
     e.preventDefault();
     showSection(viewReportsSection);
@@ -97,7 +89,7 @@ function initAdminDashboard() {
   // Listen for real-time updates for pending users
   onSnapshot(collection(db, "users"), renderPendingUsers);
 
-  // Signout Logic
+  // Signout
   const signOutBtn = document.getElementById("signOutBtn");
   if (signOutBtn) {
     signOutBtn.addEventListener("click", async () => {
@@ -109,11 +101,9 @@ function initAdminDashboard() {
 }
 
 // Fetch and render all users for management
-async function fetchAndRenderAllUsers() {
+function fetchAndRenderAllUsers() {
   const usersCol = collection(db, "users");
-  const usersSnapshot = await onSnapshot(usersCol, (snapshot) => {
-    renderAllUsers(snapshot);
-  });
+  onSnapshot(usersCol, renderAllUsers);
 }
 
 function renderAllUsers(usersSnapshot) {
@@ -133,6 +123,7 @@ function renderAllUsers(usersSnapshot) {
             <button onclick="changeUserRole('${userDoc.id}', 'admin')">Make Admin</button>
             <button onclick="changeUserRole('${userDoc.id}', 'user')">Make User</button>
             <button onclick="changeUserRole('${userDoc.id}', 'pending')">Set Pending</button>
+            <button onclick="deleteUserAndData('${userDoc.id}', '${user.email}')" style="color:#f44336;">Delete User</button>
           </div>
         </div>
       </td>
@@ -144,16 +135,40 @@ function renderAllUsers(usersSnapshot) {
 // Dropdown logic for user actions
 window.toggleDropdown = function(event, userId) {
   event.stopPropagation();
-  // Close any open dropdowns first
-  document.querySelectorAll('.user-actions .dropdown').forEach(drop => drop.classList.remove('show'));
+  // Remove any existing floating dropdown
+  const existing = document.getElementById('floating-dropdown');
+  if (existing) existing.remove();
+
+  // Get the dropdown element and button
   const dropdown = document.getElementById(`dropdown-${userId}`);
-  if (dropdown) {
-    dropdown.classList.toggle('show');
+  const btn = event.currentTarget;
+  if (dropdown && btn) {
+    // Clone dropdown for floating
+    const floatingDropdown = dropdown.cloneNode(true);
+    floatingDropdown.id = 'floating-dropdown';
+    floatingDropdown.classList.add('show');
+    floatingDropdown.style.position = 'fixed';
+    floatingDropdown.style.zIndex = '2147483647';
+    // Position below the button
+    const rect = btn.getBoundingClientRect();
+    floatingDropdown.style.top = `${rect.bottom}px`;
+    floatingDropdown.style.left = `${rect.right - floatingDropdown.offsetWidth}px`;
+    document.body.appendChild(floatingDropdown);
+
+    // Add click handlers for dropdown actions
+    floatingDropdown.querySelectorAll('button').forEach((button, idx) => {
+      const origButton = dropdown.querySelectorAll('button')[idx];
+      if (origButton) button.onclick = origButton.onclick;
+    });
   }
 };
 
-document.addEventListener('click', function() {
-  document.querySelectorAll('.user-actions .dropdown').forEach(drop => drop.classList.remove('show'));
+// Remove floating dropdown on click or scroll
+['click', 'scroll'].forEach(evt => {
+  document.addEventListener(evt, function() {
+    const floating = document.getElementById('floating-dropdown');
+    if (floating) floating.remove();
+  }, evt === 'scroll');
 });
 
 // Change user role
@@ -161,10 +176,10 @@ window.changeUserRole = async function(userId, newRole) {
   await updateDoc(doc(db, "users", userId), { role: newRole });
 };
 
+// Render pending users table
 function renderPendingUsers(usersSnapshot) {
   const tbody = document.getElementById("pending-users-table").querySelector("tbody");
-  tbody.innerHTML = ""; // Clear previous
-
+  tbody.innerHTML = "";
   usersSnapshot.forEach((userDoc) => {
     const user = userDoc.data();
     if (user.role === "pending") {
@@ -181,3 +196,35 @@ function renderPendingUsers(usersSnapshot) {
     }
   });
 }
+
+// Approve user
+window.approveUser = async function(uid) {
+  try {
+    await updateDoc(doc(db, "users", uid), { role: "user" });
+    alert('User approved.');
+  } catch (err) {
+    alert('Error approving user: ' + err.message);
+  }
+};
+
+// Reject user
+window.rejectUser = async function(uid) {
+  try {
+    await updateDoc(doc(db, "users", uid), { role: "rejected" });
+    alert('User rejected.');
+  } catch (err) {
+    alert('Error rejecting user: ' + err.message);
+  }
+};
+
+// Delete user from Firestore only
+window.deleteUserAndData = async function(userId, userEmail) {
+  if (!confirm(`Are you sure you want to delete user ${userEmail}? This cannot be undone.`)) return;
+  try {
+    await updateDoc(doc(db, "users", userId), { deleted: true }); // Optional: mark as deleted first
+    await import('https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js').then(({ deleteDoc }) => deleteDoc(doc(db, "users", userId)));
+    alert('User deleted from Firestore.');
+  } catch (err) {
+    alert('Error deleting user: ' + err.message);
+  }
+};
