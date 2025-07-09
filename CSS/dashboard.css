@@ -1,5 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
+/* dashboard.css - Cleaned up for dashboard.html and dashboard.js */
 
+@import url('https://fonts.googleapis.com/css2?family=Jost:ital,wght@0,100..900;1,100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@100..500&family=Press+Start+2P&display=swap');
 
 * {
@@ -7,65 +8,34 @@
     padding: 0;
     box-sizing: border-box;
 }
-
 body {
     font-family: "Jost", sans-serif;
     min-height: 100dvh;
     background: url(../images/Background.png) no-repeat center center/cover;
-    display: none; /* Hide content initially */
+    display: none;
 }
-/* Loader Screen-----------------------*/
-/* Loader Container */
+
+/* Loader Styles */
 #loader {
   position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: #ffffff;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  top: 0; left: 0; width: 100vw; height: 100vh;
+  background: #fff;
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
   z-index: 9999;
   font-family: 'Segoe UI', sans-serif;
 }
-
-/* Spinner Animation */
 .spinner {
-  width: 60px;
-  height: 60px;
-  border: 6px solid #cccccc;
-  border-top-color: #007BFF;
-  border-radius: 50%;
-  animation: spin 1s linear infinite;
+  width: 60px; height: 60px;
+  border: 6px solid #ccc; border-top-color: #007BFF;
+  border-radius: 50%; animation: spin 1s linear infinite;
   margin-bottom: 1rem;
 }
+@keyframes spin { to { transform: rotate(360deg); } }
+.fallback-link { margin-top: 1rem; font-size: 0.9rem; color: #555; }
+.fallback-link a { color: #007BFF; text-decoration: underline; transition: color 0.2s; }
+.fallback-link a:hover { color: #0056b3; }
 
-@keyframes spin {
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-/* Fallback Link Text */
-.fallback-link {
-  margin-top: 1rem;
-  font-size: 0.9rem;
-  color: #555555;
-}
-
-.fallback-link a {
-  color: #007BFF;
-  text-decoration: underline;
-  transition: color 0.2s ease;
-}
-
-.fallback-link a:hover {
-  color: #0056b3;
-}
-
-/* Navbar Styles--------------------------------*/
+/* Navbar Styles */
 .navbar {
     display: flex;
     align-items: center;
@@ -76,14 +46,10 @@ body {
     top: 0;
     background: transparent;
     z-index: 998;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.5);
     backdrop-filter: blur(10px);
 }
-
-.navbar.solid {
-    background: #143e6d;
-}
-
+.navbar.solid { background: #143e6d; }
 .navbar-container {
     display: flex;
     align-items: center;
@@ -92,31 +58,16 @@ body {
     padding: 0 2rem;
     max-width: 1600px;
 }
-
-.navbar-logo {
-    text-decoration: none;
-    cursor: pointer;
-}
-
-.navbar-logo img {
-    height: 35px;
-    width: 200px;
-    max-width: 100%;
-}
-
-.pixelWord {
-    font-family: "Press Start 2P", cursive;
-    font-size: 1.25rem;
-    position: translateY()
-}
+.navbar-logo { text-decoration: none; cursor: pointer; }
+.navbar-logo img { height: 35px; width: 200px; max-width: 100%; }
+.pixelWord { font-family: "Press Start 2P", cursive; font-size: 1.25rem; }
 
 .navbar-menu {
     display: flex;
     text-align: center;
     list-style: none;
 }
-
-.navbar-container .navbar-menu li a {
+.navbar-menu li a {
     text-decoration: none;
     color: white;
     font-size: 1.2rem;
@@ -124,11 +75,10 @@ body {
     padding: 3px 20px;
     border-radius: 20px;
     border: 2px solid transparent;
-    transition: all 0.7s ease;
+    transition: all 0.7s;
     white-space: nowrap;
 }
-
-.navbar-container .navbar-menu .signout-btn {
+.navbar-menu .signout-btn {
     background: none;
     border: none;
     color: white;
@@ -136,16 +86,15 @@ body {
     cursor: pointer;
     padding: 3px 20px;
     border-radius: 20px;
-    transition: all 0.7s ease;
+    transition: all 0.7s;
     margin-top: auto;
     align-self: flex-end;
 }
-
-.navbar-container .navbar-menu li a:hover,
-.navbar-container .navbar-menu li a.active {
-    color: #ffffff;
-    background: rgba(17, 74, 179, 0.8);
-    border: 2px solid white;
+.navbar-menu li a:hover,
+.navbar-menu li a.active {
+    color: #fff;
+    background: rgba(17,74,179,0.8);
+    border: 2px solid #fff;
 }
 
 .navbar-toggle {
@@ -154,122 +103,22 @@ body {
     border: none;
     padding: 10px;
     cursor: pointer;
-    position: relative; /* Add this line */
-    z-index: 2000;      /* Increase z-index */
+    position: relative;
+    z-index: 2000;
 }
-
 .bar {
     display: block;
     width: 25px;
     height: 3px;
-    background: white;
+    background: #fff;
     margin: 5px auto;
-    transition: all 0.3s ease-in-out;
+    transition: all 0.3s;
 }
 
-/*Hero Section----------------------*/
-.hero-container {
-    display: flex;
-    flex-direction: column;
-    padding: 0;
-    margin: 0;
-    height: 100vh;
-}
-
-.hero-container h1 {
-    font-family: inherit;
-    font-size: 3rem;
-    color: white;
-    text-align: center;
-    margin: 2rem 0;
-}
-
-.hero-container p {
-    font-size: 1.2rem;
-    color: white;
-    text-align: center;
-    padding: 0 20px;
-}
-
-.cards-container {
-    display: flex;
-    gap: 20px;
-    justify-content: center;
-    padding: 40px;
-}
-.card {
-    display:flex;
-    position: relative;
-    width: 100vw;
-    max-width: 1050px;
-    height: auto;
-    min-height: 450px;
-    backdrop-filter: blur(10px);
-    box-shadow: 0 0 10px rgb(255, 255, 255);
-    border-radius: 12px;
-    overflow: hidden;
-}
-.card-cover {
-    position: absolute;
-    inset: 0;
-    background: #143e6d;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    transition: opacity 0.4s;
-    z-index: 2;
-}
-.card-cover:hover {
-    opacity: 0;
-}
-.card-content {
-    padding: 50px;
-    z-index: 1;
-    color: white;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    text-align: center;
-    gap: 30px;
-}
-
-.card-content .agendaList {
-    margin: 0;
-    padding-left: 24px;
-    text-align: left;
-    display: inline-block;
-}
-
-.card-content .agendaList li {
-    font-size: 1.3rem;
-    margin-bottom: 15px;
-}
-
-.card-content .agendaList li:hover {
-    text-shadow: 0 3px 8px white;
-    transition: text-shadow 0.3s ease-in-out;
-}
-
-.card-content h3 {
-    font-size: 2rem;
-    font-weight: bold;
-    color: white;
-    font-style: italic;
-    margin-bottom: 16px;
-}
-.card-content p {
-    font-size: 1.5rem;
-    margin-bottom: 16px;
-    text-align: left;
-}
-
-/* Responsive Styles */
+/* Responsive Navbar */
 @media (max-width: 880px) {
-    .navbar {
-        backdrop-filter: none;
-    }
-
-    .navbar-container .navbar-menu {
+    .navbar { backdrop-filter: none; }
+    .navbar-menu {
         display: none;
         flex-direction: column;
         align-items: flex-start;
@@ -280,46 +129,120 @@ body {
         top: 0;
         right: 0;
         padding: 5rem 1.5rem;
-        box-shadow: 0 10px 10px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 10px 10px rgba(0,0,0,0.5);
         backdrop-filter: blur(30px);
+        background: #143e6d;
     }
-
-    .navbar-container .navbar-menu.active {
-        display: flex;
-        transition: 0.3s ease-in-out;
-    }
-
-    .navbar-toggle {
-        display: block;
-        position: relative; /* Ensure it's positioned */
-        z-index: 2000;      /* Keep it above the menu */
-    }
-
-    .navbar-toggle.active .bar:nth-child(2) {
-        opacity: 0;
-    }
-
-    .navbar-toggle.active .bar:nth-child(1) {
-        transform: translateY(8px) rotate(45deg);
-    }
-
-    .navbar-toggle.active .bar:nth-child(3) {
-        transform: translateY(-8px) rotate(-45deg);
-    }
+    .navbar-menu.active { display: flex; transition: 0.3s; }
+    .navbar-toggle { display: block; position: relative; z-index: 2000; }
+    .navbar-toggle.active .bar:nth-child(2) { opacity: 0; }
+    .navbar-toggle.active .bar:nth-child(1) { transform: translateY(8px) rotate(45deg); }
+    .navbar-toggle.active .bar:nth-child(3) { transform: translateY(-8px) rotate(-45deg); }
 }
-
 @media (max-width: 480px) {
-    .navbar-container {
-        padding: 0 1rem;
-    }
-    .navbar-logo {
-        font-size: 1.7rem;
-    }
-
-    .navbar-container .navbar-menu li a {
-        font-size: 1.2rem;
-        padding: 3px 15px;
-    }
+    .navbar-container { padding: 0 1rem; }
+    .navbar-logo { font-size: 1.7rem; }
+    .navbar-menu li a { font-size: 1.2rem; padding: 3px 15px; }
 }
 
-/* dashboard.css - Styles for user dashboard */
+/* Hero Section */
+.hero-container {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    margin: 0;
+    height: 100vh;
+}
+.hero-container h1 {
+    font-family: inherit;
+    font-size: 3rem;
+    color: #fff;
+    text-align: center;
+    margin: 2rem 0;
+}
+.hero-container p {
+    font-size: 1.2rem;
+    color: #fff;
+    text-align: center;
+    padding: 0 20px;
+}
+
+/*Contact Form------------------------------------------*/
+.contact-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: auto;
+    margin:0;
+    padding:0;
+}
+.contact-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 2rem;
+    backdrop-filter: blur(10px);
+    border: 2px solid white;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    max-width: 750px;
+    width: 100%;
+    margin: 20px;
+}
+
+.contact-form h2 {
+    color: white;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+.contact-form input,
+.contact-form textarea {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid white;
+    border-radius: 5px;
+    background: transparent;
+    color: white;
+}
+
+.contact-form  {
+    background: transparent;
+    color: black;
+    cursor: pointer;
+    font-size: 1.2rem;
+    border: 2px solid white;
+}
+
+.contact-form label {
+    color: white;
+    font-size: 1.2rem;
+    margin-bottom: 0.5rem;
+    text-align: left;
+}
+
+.contact-form button {
+    width: 50%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 2px solid white;
+    border-radius: 5px;
+    background: transparent;
+    color: rgb(255, 255, 255);
+    cursor: pointer;
+    font-size: 1.2rem;
+}
+
+.contact-form ::placeholder {
+    color: rgba(255, 255, 255, 0.699);
+}
+
+footer {
+    background: #143d6daf;
+    color: #fff;
+    text-align: center;
+    padding: 1rem 0;
+}

@@ -59,6 +59,17 @@ function setupNavbar() {
                 navbarMenu.classList.remove('active');
             }
         });
+
+        // Close menu when a tab is clicked (for mobile/hamburger)
+        const menuLinks = navbarMenu.querySelectorAll('a');
+        menuLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                if (navbarMenu.classList.contains('active')) {
+                    navbarToggle.classList.remove('active');
+                    navbarMenu.classList.remove('active');
+                }
+            });
+        });
     }
 
     window.addEventListener('scroll', function() {
@@ -80,3 +91,25 @@ function setupSignOut() {
         });
     }
 }
+
+// EmailJS Contact Form Logic
+window.addEventListener('DOMContentLoaded', function() {
+  if (window.emailjs) {
+    emailjs.init('AGk60--qzPOJcZW2G');
+  }
+
+  const contactForm = document.getElementById('contact-form');
+  if (contactForm) {
+    contactForm.addEventListener('submit', function(e) {
+      e.preventDefault();
+      // Replace 'service_qwcb55i' and 'template_mo0cr2f' with your actual IDs if needed
+      emailjs.sendForm('service_qwcb55i', 'template_mo0cr2f', this)
+        .then(function() {
+          alert('Message sent successfully!');
+          contactForm.reset();
+        }, function(error) {
+          alert('Failed to send message: ' + JSON.stringify(error));
+        });
+    });
+  }
+});

@@ -35,9 +35,7 @@
         <ul class="navbar-menu">
           <li><a href="#" class="active">Home</a></li>
           <li><a href="#">About</a></li>
-          <li><a href="#">Services</a></li>
-          <li><a href="#">Blog</a></li>
-          <li><a href="#">Contact</a></li>
+          <li><a href="#contact-form">Contact</a></li>
           <li><a href="admin-dashboard.html">Admin Portal</a></li>
           <button id="signOutBtn" class="signout-btn">Sign Out</button>
         </ul>
@@ -54,24 +52,29 @@
       </p>
     </section>
 
-    <section class="cards-container">
-      <div class="card">
-        <div class="card-content">
-          <h3>Agenda</h3>
-          <ol class="agendaList">
-            <li>Breakfast</li>
-            <li>Workout</li>
-            <li>Pool Day with Drinks + Snacks + Dessert</li>
-            <li>Freshen up and Relax</li>
-            <li>Firework Show</li>
-            <li>Late Night Movie and Chill</li>
-          </ol>
-        </div>
-      </div>
+    <section class="contact-container">
+      <form id="contact-form" class="contact-form">
+        <h2>Contact Me</h2>
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" placeholder="Enter your name" required />
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required />
+
+        <label for="message">Message:</label>
+        <textarea id="message" name="message" rows="4" placeholder="Enter your message" required></textarea>
+
+        <button type="submit">Send Message</button>
+      </form>
     </section>
+
+    <footer>
+      <p>&copy; 2025 FrostByte Inc. All rights reserved.</p>
+    </footer>
   </div>
 
   <!-- Firebase & Dashboard Logic -->
+  <script src="https://cdn.emailjs.com/dist/email.min.js"></script>
   <script type="module" src="../Java/auth.js"></script>
   <script type="module" src="../Java/dashboard.js"></script>
 </body>

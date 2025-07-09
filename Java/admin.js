@@ -51,6 +51,16 @@ function initAdminDashboard() {
   const dashboardSection = document.getElementById("dashboard-section");
   const manageUsersSection = document.getElementById("manage-users-section");
   const viewReportsSection = document.getElementById("view-reports-section");
+  const adminSidebar = document.getElementById('adminSidebar');
+  const sidebarOverlay = document.getElementById('sidebarOverlay');
+
+  // Helper to close sidebar (hamburger menu)
+  function closeSidebarMenu() {
+    if (adminSidebar && sidebarOverlay && adminSidebar.classList.contains('open')) {
+      adminSidebar.classList.remove('open');
+      sidebarOverlay.classList.remove('active');
+    }
+  }
 
   // Show only the selected section
   function showSection(section) {
@@ -70,17 +80,20 @@ function initAdminDashboard() {
     e.preventDefault();
     showSection(dashboardSection);
     setActiveTab(dashboardTab);
+    closeSidebarMenu();
   });
   manageUsersTab.addEventListener("click", (e) => {
     e.preventDefault();
     showSection(manageUsersSection);
     setActiveTab(manageUsersTab);
     fetchAndRenderAllUsers();
+    closeSidebarMenu();
   });
   viewReportsTab.addEventListener("click", (e) => {
     e.preventDefault();
     showSection(viewReportsSection);
     setActiveTab(viewReportsTab);
+    closeSidebarMenu();
   });
 
   // Show dashboard by default
