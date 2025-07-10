@@ -11,6 +11,7 @@ import { setGlobalOptions } from "firebase-functions";
 import { Request, Response } from "express";
 const functions = require("firebase-functions");
 const admin = require("firebase-admin");
+import cors from "cors";
 admin.initializeApp();
 
 // For cost control, you can set the maximum number of containers that can be
@@ -25,27 +26,31 @@ admin.initializeApp();
 // this will be the maximum concurrent request count.
 setGlobalOptions({ maxInstances: 10 });
 
-exports.deleteUserAuth = functions.https.onRequest(async (req: Request, res: Response) => {
-  // Allow only POST
-  if (req.method !== "POST") {
-    res.status(405).send("Method Not Allowed");
-    return;
-  }
-  const { uid } = req.body;
-  if (!uid) {
-    res.status(400).json({ error: "Missing uid" });
-    return;
-  }
-  try {
-    await admin.auth().deleteUser(uid);
-    res.json({ success: true });
-    return;
-  } catch (err) {
-    if (err instanceof Error) {
-      res.status(500).json({ error: err.message, stack: err.stack });
-    } else {
-      res.status(500).json({ error: "Unknown error" });
+const corsHandler = cors({ origin: true });
+
+exports.deleteUserAuth = functions.https.onRequest((req: Request, res: Response) => {
+  corsHandler(req, res, async () => {
+    // Allow only POST
+    if (req.method !== "POST") {
+      res.status(405).send("Method Not Allowed");
+      return;
     }
-    return;
-  }
+    const { uid } = req.body;
+    if (!uid) {
+      res.status(400).json({ error: "Missing uid" });
+      return;
+    }
+    try {
+      await admin.auth().deleteUser(uid);
+      res.json({ success: true });
+      return;
+    } catch (err) {
+      if (err instanceof Error) {
+        res.status(500).json({ error: err.message, stack: err.stack });
+      } else {
+        res.status(500).json({ error: "Unknown error" });
+      }
+      return;
+    }
+  });
 });
