@@ -225,19 +225,31 @@ window.rejectUser = async function(uid) {
   try {
     await updateDoc(doc(db, "users", uid), { role: "rejected" });
     await import('https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js').then(({ deleteDoc }) => deleteDoc(doc(db, "users", uid)));
-    alert('User rejected and deleted from Firestore.');
+    // Call backend to delete user from Firebase Auth
+    await fetch('http://10.0.2.120:3000/deleteUserAuth', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ uid })
+    });
+    alert('User rejected, deleted from Firestore, and removed from Firebase Auth.');
   } catch (err) {
     alert('Error rejecting/deleting user: ' + err.message);
   }
 };
 
-// Delete user from Firestore only
+// Delete user from Firestore and Firebase Auth
 window.deleteUserAndData = async function(userId, userEmail) {
   if (!confirm(`Are you sure you want to delete user ${userEmail}? This cannot be undone.`)) return;
   try {
     await updateDoc(doc(db, "users", userId), { deleted: true }); // Optional: mark as deleted first
     await import('https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js').then(({ deleteDoc }) => deleteDoc(doc(db, "users", userId)));
-    alert('User deleted from Firestore.');
+    // Call backend to delete user from Firebase Auth
+    await fetch('http://10.0.2.120:3000/deleteUserAuth', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ uid: userId })
+    });
+    alert('User deleted from Firestore and Firebase Auth.');
   } catch (err) {
     alert('Error deleting user: ' + err.message);
   }

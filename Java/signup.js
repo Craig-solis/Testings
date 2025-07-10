@@ -6,8 +6,11 @@ import { getFirestore, doc, setDoc, getDoc } from "https://www.gstatic.com/fireb
 
 const db = getFirestore();
 
-document.getElementById("signupBtn").addEventListener("click", signUp);
+if (window.emailjs) {
+  emailjs.init('AGk60--qzPOJcZW2G');
+}
 
+document.getElementById("signupBtn").addEventListener("click", signUp);
 document.getElementById("password").addEventListener("keydown", (e) => {
   if (e.key === "Enter") {
     document.getElementById("signupBtn").click();
@@ -37,6 +40,7 @@ async function signUp() {
     }
     successMessage.textContent = "Signup request sent! Await admin approval.";
     successMessage.style.display = "block";
+
   } catch (error) {
     errorMessage.textContent = error.message;
     errorMessage.style.display = "block";
