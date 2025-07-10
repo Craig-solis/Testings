@@ -244,7 +244,7 @@ window.deleteUserAndData = async function(userId, userEmail) {
     await updateDoc(doc(db, "users", userId), { deleted: true }); // Optional: mark as deleted first
     await import('https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js').then(({ deleteDoc }) => deleteDoc(doc(db, "users", userId)));
     // Call backend to delete user from Firebase Auth
-    await fetch('http://10.0.2.120:3000/deleteUserAuth', {
+    await fetch('https://us-central1-frostbyte-test-6f9ae.cloudfunctions.net/deleteUserAuth', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ uid: userId })
