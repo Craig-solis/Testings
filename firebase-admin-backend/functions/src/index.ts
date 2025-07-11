@@ -54,3 +54,39 @@ exports.deleteUserAuth = functions.https.onRequest((req: Request, res: Response)
     }
   });
 });
+
+// Create user by admin
+exports.createUserByAdmin = functions.https.onRequest((req: Request, res: Response) => {
+  corsHandler(req, res, async () => {
+    if (req.method !== "POST") {
+      res.status(405).send("Method Not Allowed");
+      return;
+    }
+    const { email, password } = req.body;
+    if (!email || !password) {
+      res.status(400).json({ error: "Missing email or password" });
+      return;
+    }
+    try {
+      const userRecord = await admin.auth().createUser({ email, password });
+      // Format date as 'Month Day, Year'
+      const formattedDate = new Date().toLocaleDateString('en-US', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+      await admin.firestore().collection("users").doc(userRecord.uid).set({
+        email,
+        role: "pending",
+        createdDate: formattedDate
+      });
+      res.json({ success: true, uid: userRecord.uid });
+    } catch (err) {
+      if (err instanceof Error) {
+        res.status(500).json({ error: err.message, stack: err.stack });
+      } else {
+        res.status(500).json({ error: "Unknown error" });
+      }
+    }
+  });
+});

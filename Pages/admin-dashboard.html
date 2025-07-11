@@ -25,7 +25,7 @@
                     <li><a href="#" id="dashboardTab" class="active">Dashboard</a></li>
                     <li><a href="#" id="manageUsersTab">Manage Users</a></li>
                     <li><a href="#" id="viewReportsTab">User Approvals</a></li>
-                    <li><a href="dashboard.html">Access User Dashboard</a></li>
+                    <li><a href="dashboard.html" class="user_dash">User Dashboard</a></li>
                     <li><button id="signOutBtn" class="signout-btn">Sign Out</button></li>
                 </ul>
             </nav>
@@ -37,6 +37,9 @@
             </section>
             <section id="manage-users-section" style="display:none;">
                 <h2>All Users</h2>
+                <ul>
+                    <button id="createUserBtn">Create User</button>
+                </ul>
                 <table id="all-users-table">
                     <thead>
                         <tr>
@@ -66,6 +69,18 @@
                 </table>
             </section>
         </main>
+    </div>
+
+    <!-- Create User Modal -->
+    <div id="createUserModal" style="display:none;">
+      <div id="createUserModalOverlay"></div>
+      <div id="createUserModalContent">
+        <h2>Create New User</h2>
+        <label>Email:<br><input type="email" id="newUserEmail"></label><br>
+        <label>Password:<br><input type="password" id="newUserPassword"></label><br>
+        <button id="submitCreateUserBtn">Create</button>
+        <button id="cancelCreateUserBtn">Cancel</button>
+      </div>
     </div>
 </body>
 </html>

@@ -11,13 +11,26 @@ onAuthStateChanged(auth, async (user) => {
     const userDoc = await getDoc(doc(db, "users", user.uid));
     if (userDoc.exists()) {
       const role = userDoc.data().role;
-      if (role === "admin" || role === "user" || role === "approved") {
+      if (role === "user" || role === "approved") {
         // Show main dashboard
         document.body.style.display = "block";
         const loader = document.getElementById("loader");
         const content = document.getElementById("content");
+        const adminDash = document.getElementById("admin-dashboard");
         if (loader) loader.style.display = "none";
         if (content) content.style.display = "block";
+        if (adminDash) adminDash.style.display= "none";
+        setupNavbar(); // Attach navbar logic after content is visible
+        setupSignOut(); // Attach signout logic after content is visible
+      } else if (role === "admin") {
+        // Show main dashboard
+        document.body.style.display = "block";
+        const loader = document.getElementById("loader");
+        const content = document.getElementById("content");
+        const adminDash = document.getElementById("admin-dashboard");
+        if (loader) loader.style.display = "none";
+        if (content) content.style.display = "block";
+        if (adminDash) adminDash.style.display= "block";
         setupNavbar(); // Attach navbar logic after content is visible
         setupSignOut(); // Attach signout logic after content is visible
       } else {

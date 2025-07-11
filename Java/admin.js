@@ -1,7 +1,7 @@
 // admin.js - Admin dashboard logic
 import { app, auth } from "../Java/firebase-config.js";
 import { getFirestore, collection, onSnapshot, doc, updateDoc, getDoc } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js";
-import { signOut, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
+import { signOut, onAuthStateChanged, createUserWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/9.6.1/firebase-auth.js";
 
 const db = getFirestore(app);
 
@@ -15,7 +15,7 @@ onAuthStateChanged(auth, async (user) => {
     if (!isSigningOut) alert("Access Denied");
     window.location.href = "../index.html";
     return;
-  }
+  };
   const userDoc = await getDoc(doc(db, "users", user.uid));
   if (!userDoc.exists() || userDoc.data().role !== "admin") {
     alert("Access Denied");
@@ -188,6 +188,53 @@ window.toggleDropdown = function(event, userId) {
 // Change user role
 window.changeUserRole = async function(userId, newRole) {
   await updateDoc(doc(db, "users", userId), { role: newRole });
+};
+
+// Create User Button and Modal
+// Show modal when createUserBtn is clicked
+const createUserBtn = document.getElementById("createUserBtn");
+const createUserModal = document.getElementById("createUserModal");
+const newUserEmailInput = document.getElementById("newUserEmail");
+const newUserPasswordInput = document.getElementById("newUserPassword");
+const submitCreateUserBtn = document.getElementById("submitCreateUserBtn");
+const cancelCreateUserBtn = document.getElementById("cancelCreateUserBtn");
+const createUserModalOverlay = document.getElementById("createUserModalOverlay");
+
+createUserBtn.addEventListener("click", () => {
+  createUserModal.style.display = "block";
+  newUserEmailInput.value = "";
+  newUserPasswordInput.value = "";
+});
+
+function closeCreateUserModal() {
+  createUserModal.style.display = "none";
+}
+cancelCreateUserBtn.onclick = closeCreateUserModal;
+createUserModalOverlay.onclick = closeCreateUserModal;
+
+submitCreateUserBtn.onclick = async function() {
+  const email = newUserEmailInput.value.trim();
+  const password = newUserPasswordInput.value.trim();
+  if (!email || !password) {
+    alert("Please enter both email and password.");
+    return;
+  }
+  try {
+    const response = await fetch('https://createuserbyadmin-q5uyghsxra-uc.a.run.app', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ email, password })
+    });
+    const result = await response.json();
+    if (result.success) {
+      alert('User created successfully and set to pending.');
+      closeCreateUserModal();
+    } else {
+      throw new Error(result.error || 'Unknown error');
+    }
+  } catch (err) {
+    alert('Error creating user: ' + err.message);
+  }
 };
 
 // Render pending users table
