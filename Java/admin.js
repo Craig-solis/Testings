@@ -200,17 +200,120 @@ const submitCreateUserBtn = document.getElementById("submitCreateUserBtn");
 const cancelCreateUserBtn = document.getElementById("cancelCreateUserBtn");
 const createUserModalOverlay = document.getElementById("createUserModalOverlay");
 
-createUserBtn.addEventListener("click", () => {
-  createUserModal.style.display = "block";
-  newUserEmailInput.value = "";
-  newUserPasswordInput.value = "";
-});
+// Delete User Modal logic
+const deleteUserModal = document.getElementById("deleteUserModal");
+const deleteUserModalOverlay = document.getElementById("deleteUserModalOverlay");
+const deleteUserModalSpinner = document.getElementById("deleteUserModalSpinner");
+const deleteUserModalStatus = document.getElementById("deleteUserModalStatus");
+const deleteUserModalCheck = document.getElementById("deleteUserModalCheck");
+const deleteUserModalOkBtn = document.getElementById("deleteUserModalOkBtn");
+const deleteUserModalConfirm = document.getElementById("deleteUserModalConfirm");
+const deleteUserModalConfirmBtn = document.getElementById("deleteUserModalConfirmBtn");
+const deleteUserModalCancelBtn = document.getElementById("deleteUserModalCancelBtn");
+let pendingDeleteUserId = null;
+let pendingDeleteUserEmail = null;
 
-function closeCreateUserModal() {
-  createUserModal.style.display = "none";
+deleteUserModalOverlay.onclick = closeDeleteUserModal;
+deleteUserModalOkBtn.onclick = closeDeleteUserModal;
+deleteUserModalCancelBtn.onclick = closeDeleteUserModal;
+
+deleteUserModalConfirmBtn.onclick = async function() {
+  if (!pendingDeleteUserId) return;
+  // Hide confirm, show spinner and status
+  deleteUserModalConfirm.style.display = "none";
+  deleteUserModalSpinner.style.display = "inline-block";
+  deleteUserModalStatus.textContent = `Deleting User ID: ${pendingDeleteUserId}...`;
+  deleteUserModalStatus.style.display = "block";
+  deleteUserModalCheck.style.display = "none";
+  deleteUserModalOkBtn.style.display = "none";
+  try {
+    await updateDoc(doc(db, "users", pendingDeleteUserId), { deleted: true });
+    await import('https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js').then(({ deleteDoc }) => deleteDoc(doc(db, "users", pendingDeleteUserId)));
+    await fetch('https://deleteuserauth-q5uyghsxra-uc.a.run.app', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ uid: pendingDeleteUserId })
+    });
+    showDeleteUserSuccess(pendingDeleteUserId);
+  } catch (err) {
+    deleteUserModalSpinner.style.display = "none";
+    deleteUserModalStatus.textContent = 'Error deleting user: ' + err.message;
+    deleteUserModalCheck.style.display = "none";
+    deleteUserModalOkBtn.style.display = "inline-block";
+  }
 }
-cancelCreateUserBtn.onclick = closeCreateUserModal;
-createUserModalOverlay.onclick = closeCreateUserModal;
+
+function showDeleteUserModal(userId, userEmail) {
+  pendingDeleteUserId = userId;
+  pendingDeleteUserEmail = userEmail;
+  deleteUserModalOverlay.style.display = "block";
+  deleteUserModal.style.display = "block";
+  deleteUserModalConfirm.style.display = "flex";
+  deleteUserModalSpinner.style.display = "none";
+  deleteUserModalStatus.textContent = "";
+  deleteUserModalStatus.style.display = "none";
+  deleteUserModalCheck.style.display = "none";
+  deleteUserModalOkBtn.style.display = "none";
+}
+
+function showDeleteUserSuccess(userId) {
+  deleteUserModalSpinner.style.display = "none";
+  deleteUserModalStatus.textContent = "";
+  deleteUserModalStatus.style.display = "none";
+  deleteUserModalCheck.style.display = "flex";
+  deleteUserModalOkBtn.style.display = "inline-block";
+}
+
+function closeDeleteUserModal() {
+  deleteUserModalOverlay.style.display = "none";
+  deleteUserModal.style.display = "none";
+  deleteUserModalConfirm.style.display = "none";
+  deleteUserModalSpinner.style.display = "none";
+  deleteUserModalStatus.textContent = "";
+  deleteUserModalStatus.style.display = "none";
+  deleteUserModalCheck.style.display = "none";
+  deleteUserModalOkBtn.style.display = "none";
+  pendingDeleteUserId = null;
+  pendingDeleteUserEmail = null;
+}
+
+window.deleteUserAndData = function(userId, userEmail) {
+  showDeleteUserModal(userId, userEmail);
+}
+
+// Create User Status Modal logic
+const createUserStatusModal = document.getElementById("createUserStatusModal");
+const createUserStatusModalOverlay = document.getElementById("createUserStatusModalOverlay");
+const createUserStatusModalSpinner = document.getElementById("createUserStatusModalSpinner");
+const createUserStatusModalStatus = document.getElementById("createUserStatusModalStatus");
+const createUserStatusModalCheck = document.getElementById("createUserStatusModalCheck");
+const createUserStatusModalOkBtn = document.getElementById("createUserStatusModalOkBtn");
+
+createUserStatusModalOverlay.onclick = closeCreateUserStatusModal;
+createUserStatusModalOkBtn.onclick = closeCreateUserStatusModal;
+
+function showCreateUserStatusModal() {
+  createUserStatusModalOverlay.style.display = "block";
+  createUserStatusModal.style.display = "block";
+  createUserStatusModalSpinner.style.display = "inline-block";
+  createUserStatusModalStatus.textContent = "Creating user...";
+  createUserStatusModalStatus.style.display = "block";
+  createUserStatusModalCheck.style.display = "none";
+  createUserStatusModalOkBtn.style.display = "none";
+}
+
+function showCreateUserSuccess() {
+  createUserStatusModalSpinner.style.display = "none";
+  createUserStatusModalStatus.textContent = "";
+  createUserStatusModalCheck.style.display = "flex";
+  createUserStatusModalOkBtn.style.display = "inline-block";
+}
+
+function closeCreateUserStatusModal() {
+  createUserStatusModalOverlay.style.display = "none";
+  createUserStatusModal.style.display = "none";
+  closeCreateUserModal();
+}
 
 submitCreateUserBtn.onclick = async function() {
   const email = newUserEmailInput.value.trim();
@@ -219,6 +322,8 @@ submitCreateUserBtn.onclick = async function() {
     alert("Please enter both email and password.");
     return;
   }
+  createUserModal.style.display = "none";
+  showCreateUserStatusModal();
   try {
     const response = await fetch('https://createuserbyadmin-q5uyghsxra-uc.a.run.app', {
       method: 'POST',
@@ -227,13 +332,15 @@ submitCreateUserBtn.onclick = async function() {
     });
     const result = await response.json();
     if (result.success) {
-      alert('User created successfully and set to pending.');
-      closeCreateUserModal();
+      showCreateUserSuccess();
     } else {
       throw new Error(result.error || 'Unknown error');
     }
   } catch (err) {
-    alert('Error creating user: ' + err.message);
+    createUserStatusModalSpinner.style.display = "none";
+    createUserStatusModalStatus.textContent = 'Error creating user: ' + err.message;
+    createUserStatusModalCheck.style.display = "none";
+    createUserStatusModalOkBtn.style.display = "inline-block";
   }
 };
 
@@ -284,20 +391,8 @@ window.rejectUser = async function(uid) {
   }
 };
 
-// Delete user from Firestore and Firebase Auth
-window.deleteUserAndData = async function(userId, userEmail) {
-  if (!confirm(`Are you sure you want to delete user ${userEmail}? This cannot be undone.`)) return;
-  try {
-    await updateDoc(doc(db, "users", userId), { deleted: true }); // Optional: mark as deleted first
-    await import('https://www.gstatic.com/firebasejs/9.6.1/firebase-firestore.js').then(({ deleteDoc }) => deleteDoc(doc(db, "users", userId)));
-    // Call backend to delete user from Firebase Auth
-    await fetch('https://deleteuserauth-q5uyghsxra-uc.a.run.app', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ uid: userId })
-    });
-    alert('User deleted from Firestore and Firebase Auth.');
-  } catch (err) {
-    alert('Error deleting user: ' + err.message);
-  }
-};
+createUserBtn.addEventListener("click", () => {
+  createUserModal.style.display = "block";
+  newUserEmailInput.value = "";
+  newUserPasswordInput.value = "";
+});

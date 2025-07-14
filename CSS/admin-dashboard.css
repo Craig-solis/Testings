@@ -430,6 +430,149 @@ color: #143e6d;
   transition: linear background-color 0.25s;
 }
 
+/* Delete User Modal Styles */
+#deleteUserModal {
+  display: none;
+}
+#deleteUserModalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.5);
+  z-index: 9998;
+}
+#deleteUserModalContent {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  padding: 32px 36px;
+  border-radius: 10px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.22);
+  z-index: 9999;
+  min-width: 340px;
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.modal-spinner {
+  width: 48px;
+  height: 48px;
+  border: 6px solid #e0e0e0;
+  border-top: 6px solid #4caf50;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 18px;
+}
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+.modal-check {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+.modal-success-text {
+  color: #4caf50;
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-top: 10px;
+  text-align: center;
+}
+/* Create User Status Modal Styles */
+#createUserStatusModal {
+  display: none;
+}
+#createUserStatusModalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0,0,0,0.5);
+  z-index: 9998;
+}
+#createUserStatusModalContent {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
+  padding: 32px 36px;
+  border-radius: 10px;
+  box-shadow: 0 2px 16px rgba(0,0,0,0.22);
+  z-index: 9999;
+  min-width: 340px;
+  min-height: 180px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.create-user-status {
+  font-size: 1.1rem;
+  color: #143e6d;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+.create-user-status.success {
+  color: #4caf50;
+}
+.create-user-status.error {
+  color: #f44336;
+}
+.create-user-status i {
+  font-size: 2rem;
+  margin-bottom: 0.5rem;
+}
+.create-user-status.success i {
+  color: #4caf50;
+}
+.create-user-status.error i {
+  color: #f44336;
+}
+.create-user-status button {
+  margin-top: 1rem;
+  padding: 0.5rem 1rem;
+  background-color: #1e56a0;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+.create-user-status button:hover {
+  background-color: #174a7a;
+}
+
+#createUserStatusModalOkBtn, #deleteUserModalOkBtn {
+    background-color: #1e56a0;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#deleteUserModalConfirmBtn, #deleteUserModalCancelBtn {
+    background-color: #1e56a0;
+    color: white;
+    border: none;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
 /* Responsive Styles */
 @media (max-width: 900px) {
     .admin-portal-container {

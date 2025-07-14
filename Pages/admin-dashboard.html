@@ -82,5 +82,48 @@
         <button id="cancelCreateUserBtn">Cancel</button>
       </div>
     </div>
+
+    <!-- Delete User Status Modal -->
+    <div id="deleteUserModal" style="display:none;">
+      <div id="deleteUserModalOverlay"></div>
+      <div id="deleteUserModalContent">
+        <div id="deleteUserModalConfirm" style="display:none; flex-direction:column; align-items:center; justify-content:center;">
+          <div class="modal-status-text" id="deleteUserModalConfirmText">Are you sure you want to delete this user?</div>
+          <div style="margin-top:18px;">
+            <button id="deleteUserModalConfirmBtn" style="margin-right:12px;">Delete</button>
+            <button id="deleteUserModalCancelBtn">Cancel</button>
+          </div>
+        </div>
+        <div id="deleteUserModalSpinner" class="modal-spinner" style="display:none;"></div>
+        <div id="deleteUserModalStatus" class="modal-status-text"></div>
+        <div id="deleteUserModalCheck" class="modal-check" style="display:none;">
+          <svg width="48" height="48" viewBox="0 0 48 48">
+            <circle cx="24" cy="24" r="22" fill="#e0ffe0" stroke="#4caf50" stroke-width="4"/>
+            <polyline points="14,26 22,34 34,18" fill="none" stroke="#4caf50" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="modal-success-text">User deleted successfully!</span>
+        </div>
+        <button id="deleteUserModalOkBtn" style="display:none; margin-top:18px;">OK</button>
+      </div>
+    </div>
+    <!-- End Delete User Status Modal -->
+
+    <!-- Create User Status Modal -->
+    <div id="createUserStatusModal" style="display:none;">
+      <div id="createUserStatusModalOverlay"></div>
+      <div id="createUserStatusModalContent">
+        <div id="createUserStatusModalSpinner" class="modal-spinner"></div>
+        <div id="createUserStatusModalStatus" class="modal-status-text">Creating user...</div>
+        <div id="createUserStatusModalCheck" class="modal-check" style="display:none;">
+          <svg width="48" height="48" viewBox="0 0 48 48">
+            <circle cx="24" cy="24" r="22" fill="#e0ffe0" stroke="#4caf50" stroke-width="4"/>
+            <polyline points="14,26 22,34 34,18" fill="none" stroke="#4caf50" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <span class="modal-success-text">User created successfully and set to pending.</span>
+        </div>
+        <button id="createUserStatusModalOkBtn" style="display:none; margin-top:18px;">OK</button>
+      </div>
+    </div>
+    <!-- End Create User Status Modal -->
 </body>
 </html>
