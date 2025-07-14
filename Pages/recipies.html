@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipies</title>
+    <link rel="stylesheet" href="../CSS/recipies.css">
+    <link rel="icon" type="image/png" href="../images/FrostByte_logo_ABV.png">
+    <script type="module" src="../Java/recipies.js"></script>
+</head>
+<body>
+    <aside class="recipe-sidebar">
+        <input class="searchBar" type="text" id="searchBar" placeholder="Search Recipes..." />
+        <div class="recipeGroup">
+            <button class="group-toggle" data-group="dessert">Dessert ▼</button>
+            <ul class="dropdown" id="dessert-list" style="display:none;">
+                <li class="recipe-item" data-recipe="Chocolate Cake">Chocolate Cake</li>
+                <li class="recipe-item" data-recipe="Apple Pie">Apple Pie</li>
+            </ul>
+        </div>
+    </aside>
+    <section class="recipe-container" id="main-recipe">
+        <h1>Recipies</h1>
+        <p>Welcome to the recipes page! Here you can find a collection of delicious recipes to try out.</p>
+    </section>
+</body>
+</html>

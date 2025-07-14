@@ -579,7 +579,7 @@ color: #143e6d;
         flex-direction: column;
     }
     .admin-sidebar {
-        position: fixed;
+        position: absolute;
         left: 0;
         top: 0;
         height: 100vh;
