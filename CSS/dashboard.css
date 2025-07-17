@@ -62,7 +62,7 @@ html {
     max-width: 1600px;
 }
 .navbar-logo { text-decoration: none; cursor: pointer; }
-.navbar-logo img { height: 35px; width: 200px; max-width: 100%; }
+.navbar-logo img { height: 55px; width: auto; }
 .pixelWord { font-family: "Press Start 2P", cursive; font-size: 1.25rem; }
 
 .navbar-menu {

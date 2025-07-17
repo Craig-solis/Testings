@@ -254,9 +254,10 @@ body {
 }
 .user-actions .dropdown {
     display: none;
-    position: fixed;
-    right: 0;
-    top: 0;
+    position: absolute;
+    top: 100%;
+    right: 100%;
+    left: auto;
     background: #fff;
     border: 1px solid #ccc;
     border-radius: 6px;
@@ -266,6 +267,7 @@ body {
 }
 .user-actions .dropdown.show {
     display: block;
+    animation: fadeInDropdown 0.18s ease;
 }
 .user-actions .dropdown button {
     width: 100%;

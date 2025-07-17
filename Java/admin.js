@@ -24,6 +24,26 @@ onAuthStateChanged(auth, async (user) => {
   }
   document.body.style.display = "block";
   initAdminDashboard();
+  resetInactivityTimer(); // Start inactivity timer
+});
+
+//Session Timeout for inactivity
+let inactivityTimeout;
+const INACTIVITY_LIMIT = 30 * 60 * 1000; // 30 minutes
+
+function autoSignOut() {
+  alert("You have been signed out due to inactivity.");
+  signOut(auth);
+  window.location.href = "../index.html";
+}
+
+function resetInactivityTimer() {
+  if (inactivityTimeout) clearTimeout(inactivityTimeout);
+  inactivityTimeout = setTimeout(autoSignOut, INACTIVITY_LIMIT);
+}
+
+['mousemove', 'keydown', 'mousedown', 'touchstart'].forEach(event => {
+  document.addEventListener(event, resetInactivityTimer, true);
 });
 
 // Sidebar hamburger menu (mobile)
@@ -163,10 +183,13 @@ window.toggleDropdown = function(event, userId) {
     floatingDropdown.classList.add('show');
     floatingDropdown.style.position = 'fixed';
     floatingDropdown.style.zIndex = '2147483647';
-    // Position below the button
+    // Position so the top right of dropdown aligns with bottom left of button
     const rect = btn.getBoundingClientRect();
+    // Wait for dropdown to be added to DOM to get correct width/height
+    document.body.appendChild(floatingDropdown);
+    const ddRect = floatingDropdown.getBoundingClientRect();
     floatingDropdown.style.top = `${rect.bottom}px`;
-    floatingDropdown.style.left = `${rect.right - floatingDropdown.offsetWidth}px`;
+    floatingDropdown.style.left = `${rect.left - ddRect.width}px`;
     document.body.appendChild(floatingDropdown);
 
     // Add click handlers for dropdown actions

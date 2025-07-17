@@ -9,19 +9,35 @@
     <script type="module" src="../Java/recipies.js"></script>
 </head>
 <body>
-    <aside class="recipe-sidebar">
-        <input class="searchBar" type="text" id="searchBar" placeholder="Search Recipes..." />
-        <div class="recipeGroup">
-            <button class="group-toggle" data-group="dessert">Dessert ▼</button>
-            <ul class="dropdown" id="dessert-list" style="display:none;">
-                <li class="recipe-item" data-recipe="Chocolate Cake">Chocolate Cake</li>
-                <li class="recipe-item" data-recipe="Apple Pie">Apple Pie</li>
+    <section class="hero-container">
+        <nav class="navbar-recipe">
+            <img src="../images/Light_Logo_Full.png" alt="Logo" class="logo">
+            <ul>
+                <li><a href="dashboard.html">Home</a></li>
+                <li class="dropdown">
+                    <a href="#">Sweets</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Chocolate Cake</a></li>
+                        <li><a href="#">Ice Cream</a></li>
+                        <li><a href="#">Fruit Tart</a></li>
+                    </ul>
+                </li>
+                <li class="dropdown">
+                    <a href="#">Meals</a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#">Breakfast</a></li>
+                        <li><a href="#">Lunch</a></li>
+                        <li><a href="#">Dinner</a></li>
+                    </ul>
+                </li>
+                <li><a href="#">Snacks</a></li>
+                <li><a href="#">Drinks</a></li>
             </ul>
-        </div>
-    </aside>
-    <section class="recipe-container" id="main-recipe">
-        <h1>Recipies</h1>
-        <p>Welcome to the recipes page! Here you can find a collection of delicious recipes to try out.</p>
+        </nav>
+        <section class="top-desc">
+            <h1>Explore Our Delicious Recipes</h1>
+            <p>Discover a variety of recipes ranging from sweets to meals, snacks, and drinks. Click on the categories above to explore!</p>
+        </section>
     </section>
 </body>
 </html>
