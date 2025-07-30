@@ -48,14 +48,74 @@
       </nav>
 
       <section class="hero-container">
-        <h1 class="hero-title">
-          Welcome to <strong>YOUR</strong> New Favorite Page
-        </h1>
+        <h1 class="hero-title">DevSecOps Hub</h1>
         <p>
-          This was designed to have a space to bounce around ideas, design
-          something cool, and make things a bit more interesting. <br /><br />
-          Take a look around and check out the forms I already have posted.
+          Your centralized platform for integrating security into every stage of
+          the development lifecycle. Monitor vulnerabilities, automate security
+          testing, and ensure compliance across your DevSecOps pipeline.
+          <br /><br />
+          Explore our security tools, threat intelligence feeds, and automated
+          security assessments below.
         </p>
+      </section>
+
+      <!-- Security Monitoring Section -->
+      <section class="security-monitoring">
+        <h2>Endpoint Security Monitoring</h2>
+        <div class="endpoint-grid">
+          <div class="endpoint-card" id="endpoint-status">
+            <h3>Endpoint Status</h3>
+            <div id="endpoint-info">
+              <p>Loading endpoint information...</p>
+            </div>
+            <button id="refresh-endpoints" class="btn-primary">
+              Refresh Data
+            </button>
+          </div>
+
+          <div class="endpoint-card" id="security-scan">
+            <h3>Security Scan Results</h3>
+            <div id="scan-results">
+              <p>No recent scans available</p>
+            </div>
+            <button id="run-scan" class="btn-secondary">
+              Run Security Scan
+            </button>
+          </div>
+
+          <div class="endpoint-card" id="threat-level">
+            <h3>Threat Assessment</h3>
+            <div id="threat-info">
+              <div class="threat-indicator low">
+                <span class="threat-level">LOW</span>
+                <span class="threat-description">System appears secure</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="endpoint-config">
+          <h3>Agent Configuration</h3>
+          <div class="config-form">
+            <label for="endpoint-url">Endpoint URL:</label>
+            <input
+              type="text"
+              id="endpoint-url"
+              placeholder="http://target-machine:5000"
+              value="http://localhost:5000"
+            />
+            <label for="api-key">API Key:</label>
+            <input
+              type="password"
+              id="api-key"
+              placeholder="Enter API key"
+              value="your-secret-api-key"
+            />
+            <button id="test-connection" class="btn-primary">
+              Test Connection
+            </button>
+          </div>
+        </div>
       </section>
 
       <section class="contact-container">
