@@ -1,55 +1,60 @@
 <!-- index.html - FrostByte Landing Page -->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FrostByte | Home</title>
-    <link rel="stylesheet" href="../CSS/index.css">
-    <link rel="icon" type="image/png" href="../images/FrostByte_logo_ABV.png">
-</head>
-<body>
+    <link rel="stylesheet" href="CSS/index.css" />
+    <link rel="icon" type="image/png" href="images/FrostByte_logo_ABV.png" />
+  </head>
+  <body>
     <nav class="index-nav">
-        <img src="../images/FrostByte_logo_ABV.png" alt="logo">
-        <ul id="navMenu">
-            <li><a href="#" class="active">Home</a></li>
-            <li><a href="../Pages/login.html">Login</a></li>
-            <li><a href="../Pages/signup.html">Sign Up</a></li>
-        </ul>
-        <button class="hamburger" id="navHamburger" aria-label="Open navigation menu">
-            <span class="bar"></span>
-            <span class="bar"></span>
-            <span class="bar"></span>
-        </button>
-        <div class="nav-overlay" id="navOverlay"></div>
+      <img src="images/Light_Logo_Full_DESC.png" alt="FrostByte Logo" />
+      <ul id="navMenu">
+        <li><a href="#" class="active">Home</a></li>
+        <li style="display: none;"><a href="Pages/login.html">Login</a></li>
+        <li style="display: none;"><a href="Pages/signup.html">Sign Up</a></li>
+      </ul>
+      <button
+        class="hamburger"
+        id="navHamburger"
+        aria-label="Open navigation menu"
+      >
+        <span class="bar"></span>
+        <span class="bar"></span>
+        <span class="bar"></span>
+      </button>
+      <div class="nav-overlay" id="navOverlay"></div>
     </nav>
     <div class="main-content">
-        <h1>Welcome to FrostByte!</h1>
-        <p>Your go-to platform for all things tech and innovation.<br>Sign up or log in to get started!</p>
-        <a href="../Pages/signup.html" class="cta-btn">Get Started</a>
+      <h1>Welcome to FrostByte!</h1>
+      <p>
+        Your go-to platform for all things tech and innovation.<br />Sign up or
+        log in to get started!
+      </p>
+      <a href="Pages/signup.html" class="cta-btn">Get Started</a>
     </div>
-    <footer>
-        &copy; 2025 FrostByte Inc. All rights reserved.
-    </footer>
+    <footer>&copy; 2025 FrostByte Inc. All rights reserved.</footer>
     <script>
-      const hamburger = document.getElementById('navHamburger');
-      const navMenu = document.getElementById('navMenu');
-      const navOverlay = document.getElementById('navOverlay');
-      hamburger.addEventListener('click', () => {
-        navMenu.classList.toggle('open');
-        navOverlay.classList.toggle('active');
+      const hamburger = document.getElementById("navHamburger");
+      const navMenu = document.getElementById("navMenu");
+      const navOverlay = document.getElementById("navOverlay");
+      hamburger.addEventListener("click", () => {
+        navMenu.classList.toggle("open");
+        navOverlay.classList.toggle("active");
       });
-      navOverlay.addEventListener('click', () => {
-        navMenu.classList.remove('open');
-        navOverlay.classList.remove('active');
+      navOverlay.addEventListener("click", () => {
+        navMenu.classList.remove("open");
+        navOverlay.classList.remove("active");
       });
       // Optional: close menu on link click (mobile)
-      navMenu.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', () => {
-          navMenu.classList.remove('open');
-          navOverlay.classList.remove('active');
+      navMenu.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", () => {
+          navMenu.classList.remove("open");
+          navOverlay.classList.remove("active");
         });
       });
     </script>
-</body>
+  </body>
 </html>
