@@ -6,11 +6,16 @@
   box-sizing: border-box;
 }
 
+html {
+  height: 100%;
+}
+
 body {
   font-family: "Inter", "Segoe UI", Arial, sans-serif;
   background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 50%, #1a1a1a 100%);
   color: #e0e0e0;
   min-height: 100vh;
+  height: 100%;
   display: flex;
   flex-direction: column;
   overflow-x: hidden;
@@ -42,7 +47,7 @@ body::before {
   pointer-events: none;
   z-index: -1;
 }
-
+/* #region Navigation */
 .index-nav {
   display: flex;
   align-items: center;
@@ -118,7 +123,7 @@ body::before {
   height: 100%;
   background: linear-gradient(
     90deg,
-    rgba(0, 255, 213, 0.15),
+    rgba(123, 226, 204, 0.39),
     rgba(0, 255, 213, 0.1)
   );
   transition: width 0.3s ease;
@@ -169,7 +174,9 @@ body::before {
   border-radius: 2px;
   transition: all 0.3s ease;
 }
+/* #endregion Navigation */
 
+/* #region Main Content */
 .main-content {
   flex: 1;
   display: flex;
@@ -208,15 +215,198 @@ body::before {
   background-clip: text;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
+  position: relative;
+  overflow: visible;
 }
+
+/* #region Snow Effect */
+
+/* Snow Effect Container */
+.snow-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  overflow: hidden;
+  z-index: 1;
+  max-height: 100vh;
+}
+
+/* Individual Snowflakes */
+.snowflake {
+  position: absolute;
+  color: rgba(255, 255, 255, 0.8);
+  font-size: 2em;
+  animation-name: snowfall;
+  animation-timing-function: linear;
+  animation-iteration-count: infinite;
+  animation-duration: var(--fall-duration);
+  animation-delay: var(--fall-delay);
+  left: var(--left-position);
+  top: -2rem; /* Start from above the h1 */
+}
+
+/* Cyan-tinted snowflakes for theme consistency */
+.snowflake:nth-child(even) {
+  color: rgba(0, 255, 213, 0.6);
+  filter: drop-shadow(0 0 3px rgba(0, 255, 213, 0.3));
+}
+
+.snowflake:nth-child(odd) {
+  color: rgba(255, 255, 255, 0.7);
+  filter: drop-shadow(0 0 2px rgba(255, 255, 255, 0.2));
+}
+
+@keyframes snowfall {
+  0% {
+    transform: translateY(0) rotate(0deg) scale(1);
+    opacity: 0;
+  }
+  10% {
+    opacity: 1;
+  }
+  90% {
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(100vh) rotate(360deg) scale(0.5);
+    opacity: 0;
+  }
+}
+
+/* Snow Effect Variants for Different Sizes and Speeds */
+.snowflake:nth-child(1) {
+  --fall-duration: 8s;
+  --fall-delay: 0s;
+  --left-position: 10%;
+  font-size: 0.8em;
+}
+.snowflake:nth-child(2) {
+  --fall-duration: 12s;
+  --fall-delay: 1s;
+  --left-position: 20%;
+  font-size: 1.2em;
+}
+.snowflake:nth-child(3) {
+  --fall-duration: 10s;
+  --fall-delay: 2s;
+  --left-position: 30%;
+  font-size: 0.9em;
+}
+.snowflake:nth-child(4) {
+  --fall-duration: 14s;
+  --fall-delay: 0.5s;
+  --left-position: 40%;
+  font-size: 1.1em;
+}
+.snowflake:nth-child(5) {
+  --fall-duration: 9s;
+  --fall-delay: 1.5s;
+  --left-position: 50%;
+  font-size: 0.7em;
+}
+.snowflake:nth-child(6) {
+  --fall-duration: 11s;
+  --fall-delay: 3s;
+  --left-position: 60%;
+  font-size: 1.3em;
+}
+.snowflake:nth-child(7) {
+  --fall-duration: 13s;
+  --fall-delay: 2.5s;
+  --left-position: 70%;
+  font-size: 0.8em;
+}
+.snowflake:nth-child(8) {
+  --fall-duration: 7s;
+  --fall-delay: 1.2s;
+  --left-position: 80%;
+  font-size: 1em;
+}
+.snowflake:nth-child(9) {
+  --fall-duration: 15s;
+  --fall-delay: 3.5s;
+  --left-position: 90%;
+  font-size: 0.9em;
+}
+.snowflake:nth-child(10) {
+  --fall-duration: 8.5s;
+  --fall-delay: 0.8s;
+  --left-position: 15%;
+  font-size: 1.1em;
+}
+.snowflake:nth-child(11) {
+  --fall-duration: 12.5s;
+  --fall-delay: 2.8s;
+  --left-position: 25%;
+  font-size: 0.6em;
+}
+.snowflake:nth-child(12) {
+  --fall-duration: 9.5s;
+  --fall-delay: 1.8s;
+  --left-position: 35%;
+  font-size: 1.4em;
+}
+.snowflake:nth-child(13) {
+  --fall-duration: 11.5s;
+  --fall-delay: 0.3s;
+  --left-position: 45%;
+  font-size: 0.8em;
+}
+.snowflake:nth-child(14) {
+  --fall-duration: 10.5s;
+  --fall-delay: 2.2s;
+  --left-position: 55%;
+  font-size: 1.2em;
+}
+.snowflake:nth-child(15) {
+  --fall-duration: 13.5s;
+  --fall-delay: 1.7s;
+  --left-position: 65%;
+  font-size: 0.7em;
+}
+.snowflake:nth-child(16) {
+  --fall-duration: 8.2s;
+  --fall-delay: 3.2s;
+  --left-position: 75%;
+  font-size: 1em;
+}
+.snowflake:nth-child(17) {
+  --fall-duration: 14.5s;
+  --fall-delay: 0.7s;
+  --left-position: 85%;
+  font-size: 0.9em;
+}
+.snowflake:nth-child(18) {
+  --fall-duration: 7.5s;
+  --fall-delay: 2.7s;
+  --left-position: 95%;
+  font-size: 1.3em;
+}
+.snowflake:nth-child(19) {
+  --fall-duration: 12.2s;
+  --fall-delay: 1.3s;
+  --left-position: 5%;
+  font-size: 0.8em;
+}
+.snowflake:nth-child(20) {
+  --fall-duration: 9.8s;
+  --fall-delay: 3.8s;
+  --left-position: 22%;
+  font-size: 1.1em;
+}
+
+/* #endregion Snow Effect */
 
 .main-content p {
   font-size: 1.4rem;
   margin-bottom: 3rem;
-  color: #e0e0e0;
+  color: #ffffff;
   line-height: 1.6;
   max-width: 600px;
-  background: rgba(255, 255, 255, 0.03);
+  background: rgba(255, 255, 255, 0.096);
   backdrop-filter: blur(10px);
   padding: 1.5rem 2rem;
   border-radius: 16px;
@@ -270,7 +460,10 @@ body::before {
   transform: translateY(0);
 }
 
+/* #endregion Main Content */
+
 footer {
+  background: transparent;
   backdrop-filter: blur(20px);
   border-top: 1px solid rgba(0, 255, 213, 0.1);
   color: #b0b0b0;
@@ -297,7 +490,7 @@ footer::before {
   z-index: -1;
 }
 
-/* Responsive Design */
+/* #region Responsive Design */
 @media (max-width: 768px) {
   .index-nav {
     flex-direction: row;
@@ -389,3 +582,5 @@ footer::before {
     display: block;
   }
 }
+
+/* #endregion Responsive Design */
